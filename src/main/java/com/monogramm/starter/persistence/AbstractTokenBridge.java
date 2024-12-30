@@ -45,7 +45,7 @@ public abstract class AbstractTokenBridge<T extends AbstractToken,
       if (getUserRepository() == null) {
         user = User.builder().id(dto.getUser()).build();
       } else {
-        user = this.getUserRepository().findById(dto.getUser());
+        user = this.getUserRepository().findById(dto.getUser()).get();
       }
       entity.setUser(user);
     }

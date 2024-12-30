@@ -156,7 +156,7 @@ public interface GenericService<T extends AbstractGenericEntity, D extends Abstr
    * @return a page of entities
    */
   default Page<T> findAll(int page, int size, Sort sort) {
-    final Pageable pageable = new PageRequest(page, size, sort);
+    final Pageable pageable = PageRequest.of(page, size, sort);
 
     return this.findAll(pageable);
   }
@@ -219,7 +219,7 @@ public interface GenericService<T extends AbstractGenericEntity, D extends Abstr
    * @return a page of entities
    */
   default Page<T> findAllByOwner(int page, int size, Sort sort, final User owner) {
-    final Pageable pageable = new PageRequest(page, size, sort);
+    final Pageable pageable = PageRequest.of(page, size, sort);
 
     return this.findAllByOwner(pageable, owner);
   }

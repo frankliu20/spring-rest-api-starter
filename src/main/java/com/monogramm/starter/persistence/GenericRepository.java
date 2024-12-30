@@ -93,8 +93,8 @@ public interface GenericRepository<T extends AbstractGenericEntity> extends JpaR
    * 
    * @return the entity matching the identifier, or {@code null} if none matches.
    */
-  @Transactional(readOnly = true)
-  T findById(final UUID entityId);
+//  @Transactional(readOnly = true)
+//  T findById(final UUID entityId);
 
   /**
    * Find an entity through its primary key and owner.
@@ -128,7 +128,7 @@ public interface GenericRepository<T extends AbstractGenericEntity> extends JpaR
    * @throws NullPointerException if the {@code entity} is {@code null}.
    */
   default T update(final T entity) {
-    T updateEntity = findById(entity.getId());
+    T updateEntity = findById(entity.getId()).orElse(null);
 
     if (updateEntity != null) {
       updateEntity.update(entity);
@@ -174,7 +174,7 @@ public interface GenericRepository<T extends AbstractGenericEntity> extends JpaR
    * 
    * @return the number of deleted entities.
    */
-  Integer deleteById(final UUID entityId);
+//  Integer deleteById(final UUID entityId);
 
   /**
    * Delete an entity through the repository only if owned by given owner id.

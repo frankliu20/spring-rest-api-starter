@@ -320,7 +320,7 @@ public abstract class AbstractGenericController<T extends AbstractGenericEntity,
         switch (propertyOptions.length) {
           case 1:
             // Only property provided
-            order = new Order(propertyOptions[0]);
+            order = new Order(Direction.ASC, propertyOptions[0]);
             break;
 
           case 2:
@@ -366,7 +366,7 @@ public abstract class AbstractGenericController<T extends AbstractGenericEntity,
 
     final Sort order;
     if (orders != null && !orders.isEmpty()) {
-      order = new Sort(orders);
+      order = Sort.by(orders);
     } else {
       order = null;
     }

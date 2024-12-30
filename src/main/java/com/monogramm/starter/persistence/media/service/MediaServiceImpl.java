@@ -172,21 +172,21 @@ public class MediaServiceImpl extends AbstractGenericService<Media, MediaDto>
   @Transactional(rollbackFor = {EntityNotFoundException.class}, readOnly=false)
   public void deleteById(UUID entityId) {
     // Only delete if has administration authorities
-    final Media entity = getRepository().findById(entityId);
+    final var entity = getRepository().findById(entityId);
 
-    if (entity == null) {
+    if (entity.isEmpty()) {
       throw this.createEntityNotFoundException(entityId);
     }
 
-    final Path mediaFolder = this.getEntityDirectory(entity);
-    final Integer deleted = getRepository().deleteById(entityId);
+    final Path mediaFolder = this.getEntityDirectory(entity.get());
+    getRepository().deleteById(entityId);
 
-    if (deleted == null || deleted == 0) {
-      throw this.createEntityNotFoundException(entityId);
-    } else {
-      StorageUtils.deleteFile(mediaFolder);
-      // If storage removal fails, the exception should trigger the rollback in database
-    }
+//    if (deleted == null || deleted == 0) {
+//      throw this.createEntityNotFoundException(entityId);
+//    } else {
+//      StorageUtils.deleteFile(mediaFolder);
+//      // If storage removal fails, the exception should trigger the rollback in database
+//    }
   }
 
   @Override

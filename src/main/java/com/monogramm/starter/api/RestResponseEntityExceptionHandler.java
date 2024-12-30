@@ -16,7 +16,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.security.access.AccessDeniedException;
@@ -205,7 +204,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
    * @return an error response.
    */
   protected ResponseEntity<ExceptionMessage> errorResponse(final Throwable throwable,
-      finalHttpStatusCode status) {
+                                                           HttpStatus status) {
     final ExceptionMessage message;
     if (null == throwable) {
       LOG.error("Unknown error caught in RESTController {}", status);
@@ -227,7 +226,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
    * 
    * @return a response.
    */
-  protected <T> ResponseEntity<T> response(final T body, finalHttpStatusCode status) {
+  protected <T> ResponseEntity<T> response(final T body, HttpStatus status) {
     LOG.debug("Responding with a status of {}", status);
     return new ResponseEntity<>(body, new HttpHeaders(), status);
   }

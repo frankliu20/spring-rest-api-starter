@@ -74,7 +74,7 @@ public class RoleBridge extends AbstractGenericBridge<Role, RoleDto> {
         }
       } else {
         for (final UUID id : dto.getPermissions()) {
-          final Permission permission = this.permissionRepository.findById(id);
+          final Permission permission = this.permissionRepository.findById(id).orElse(null);
           if (permission != null) {
             entity.addPermission(permission);
           }

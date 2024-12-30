@@ -73,7 +73,7 @@ public class UserBridge extends AbstractGenericBridge<User, UserDto> {
       if (roleRepository == null) {
         role = Role.builder().id(dto.getRole()).build();
       } else {
-        role = this.roleRepository.findById(dto.getRole());
+        role = this.roleRepository.findById(dto.getRole()).get();
       }
       entity.setRole(role);
     }

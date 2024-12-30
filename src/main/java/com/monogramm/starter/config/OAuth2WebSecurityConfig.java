@@ -97,13 +97,11 @@ public class OAuth2WebSecurityConfig {
         return auth.build();
   }
 
-  @Override
   protected void configure(final HttpSecurity http) throws Exception {
     http.addFilterBefore(jsonFilter, ChannelProcessingFilter.class).csrf(withDefaults()).httpBasic(basic -> basic
         .disable()).authorizeRequests(requests -> requests.anyRequest().authenticated()).formLogin(login -> login.permitAll());
   }
 
-  @Override
   public void configure(final WebSecurity web) throws Exception {
     web.debug(applicationSecurityProperties.isDebug()).ignoring()
         .requestMatchers(MediaController.DOWNLOAD_PATH + "/**");

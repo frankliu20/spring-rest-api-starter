@@ -1,28 +1,14 @@
-/*
- * Creation by mathieu.brunot the 2018-07-28.
- */
-
 package com.monogramm.starter.config;
-
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-
 import org.springdoc.core.GroupedOpenApi;
-import org.springdoc.core.customizers.OpenApiCustomiser;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.Contact;
 
-/**
- * SpringFoxConfig.
- * 
- * @author mathieu.brunot
- */
 @Configuration
-
 public class SpringFoxConfig {
 
   @Autowired
@@ -31,10 +17,10 @@ public class SpringFoxConfig {
   @Bean
   public GroupedOpenApi apiDocket() {
     return GroupedOpenApi.builder()
-        .group("default")
-        .pathsToMatch("/**")
-        .addOpenApiCustomiser(openApi -> openApi.info(getApiInfo()))
-        .build();
+            .group("default")
+            .pathsToMatch("/**")
+            .addOpenApiCustomiser(openApi -> openApi.info(getApiInfo()))
+            .build();
   }
 
   private Info getApiInfo() {
@@ -52,11 +38,11 @@ public class SpringFoxConfig {
     final String contactEmail = env.getProperty("info.contact.email");
 
     return new Info()
-        .title(appName + " Documentation")
-        .description(appDescription)
-        .version(appVersion)
-        .termsOfService(tosUrl)
-        .license(new io.swagger.v3.oas.models.info.License().name(licenseName).url(licenseUrl))
-        .contact(new Contact().name(contactName).url(contactUrl).email(contactEmail));
+            .title(appName + " Documentation")
+            .description(appDescription)
+            .version(appVersion)
+            .termsOfService(tosUrl)
+            .license(new io.swagger.v3.oas.models.info.License().name(licenseName).url(licenseUrl))
+            .contact(new Contact().name(contactName).url(contactUrl).email(contactEmail));
   }
 }

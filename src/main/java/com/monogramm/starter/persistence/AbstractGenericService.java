@@ -158,7 +158,7 @@ public abstract class AbstractGenericService<T extends AbstractGenericEntity,
 
   @Override
   public T findById(UUID entityId) {
-    return repository.findById(entityId);
+    return repository.findById(entityId).orElse(null);
   }
 
   @Override
@@ -210,11 +210,7 @@ public abstract class AbstractGenericService<T extends AbstractGenericEntity,
   @Transactional(rollbackFor = {EntityNotFoundException.class})
   public void deleteById(UUID entityId) {
     // Only delete if has administration authorities
-    final Integer deleted = repository.deleteById(entityId);
-
-    if (deleted == null || deleted == 0) {
-      throw this.createEntityNotFoundException(entityId);
-    }
+    repository.deleteById(entityId);
   }
 
   @Override

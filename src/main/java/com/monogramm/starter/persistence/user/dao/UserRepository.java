@@ -109,7 +109,7 @@ public interface UserRepository extends GenericRepository<User> {
    *         layer.
    */
   default User setPassword(final UUID userId, final char[] password) {
-    User updateEntity = this.findById(userId);
+    User updateEntity = this.findById(userId).orElse(null);
 
     if (updateEntity != null) {
       updateEntity.setPassword(password);
@@ -158,7 +158,7 @@ public interface UserRepository extends GenericRepository<User> {
    *         layer.
    */
   default User setEnabled(final UUID userId, final boolean enabled) {
-    User updateEntity = this.findById(userId);
+    User updateEntity = this.findById(userId).orElse(null);
 
     if (updateEntity != null) {
       updateEntity.setEnabled(enabled);
@@ -207,7 +207,7 @@ public interface UserRepository extends GenericRepository<User> {
    *         layer.
    */
   default User setVerified(final UUID userId, final boolean verified) {
-    User updateEntity = this.findById(userId);
+    User updateEntity = this.findById(userId).orElse(null);
 
     if (updateEntity != null) {
       updateEntity.setVerified(verified);

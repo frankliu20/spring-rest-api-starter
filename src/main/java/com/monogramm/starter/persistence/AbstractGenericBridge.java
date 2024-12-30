@@ -109,7 +109,7 @@ public abstract class AbstractGenericBridge<T extends AbstractGenericEntity,
       if (userRepository == null) {
         createdBy = User.builder().id(dto.getCreatedBy()).build();
       } else {
-        createdBy = this.userRepository.findById(dto.getCreatedBy());
+        createdBy = this.userRepository.findById(dto.getCreatedBy()).orElse(null);
       }
       entity.setCreatedBy(createdBy);
     }
@@ -120,7 +120,7 @@ public abstract class AbstractGenericBridge<T extends AbstractGenericEntity,
       if (userRepository == null) {
         modifiedBy = User.builder().id(dto.getModifiedBy()).build();
       } else {
-        modifiedBy = this.userRepository.findById(dto.getModifiedBy());
+        modifiedBy = this.userRepository.findById(dto.getModifiedBy()).orElse(null);
       }
       entity.setModifiedBy(modifiedBy);
     }
@@ -130,7 +130,7 @@ public abstract class AbstractGenericBridge<T extends AbstractGenericEntity,
       if (userRepository == null) {
         owner = User.builder().id(dto.getOwner()).build();
       } else {
-        owner = this.userRepository.findById(dto.getOwner());
+        owner = this.userRepository.findById(dto.getOwner()).orElse(null);
       }
       entity.setOwner(owner);
     }
