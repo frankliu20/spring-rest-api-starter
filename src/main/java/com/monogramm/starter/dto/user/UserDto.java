@@ -37,9 +37,9 @@ public class UserDto extends AbstractGenericDto {
     public int compare(AbstractGenericDto o1, AbstractGenericDto o2) {
       final int compare;
 
-      if (o1 instanceof UserDto && o2 instanceof UserDto) {
+      if (o1 instanceof UserDto dto && o2 instanceof UserDto dto1) {
         final int compareName =
-            compareOnString(((UserDto) o1).getUsername(), ((UserDto) o2).getUsername());
+            compareOnString(dto.getUsername(), dto1.getUsername());
 
         if (compareName != 0) {
           compare = compareName;
@@ -250,8 +250,7 @@ public class UserDto extends AbstractGenericDto {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof UserDto) {
-      final UserDto other = (UserDto) obj;
+    if (equals && obj instanceof UserDto other) {
       equals = Objects.equals(getUsername(), other.getUsername());
 
       if (equals) {

@@ -12,9 +12,8 @@ import com.monogramm.starter.utils.validation.ValidUuid;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
@@ -108,7 +107,6 @@ public class RoleController extends AbstractGenericController<Role, RoleDto> {
    * @param eventPublisher the event publisher.
    * @param roleService the role service.
    */
-  @Autowired
   public RoleController(MessageSource messageSource, ApplicationEventPublisher eventPublisher,
       RoleService roleService) {
     super(messageSource, eventPublisher, roleService);

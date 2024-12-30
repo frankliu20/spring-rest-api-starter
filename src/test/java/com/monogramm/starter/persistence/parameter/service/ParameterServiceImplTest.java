@@ -4,11 +4,9 @@
 
 package com.monogramm.starter.persistence.parameter.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -21,7 +19,7 @@ import com.monogramm.starter.persistence.parameter.dao.ParameterRepository;
 import com.monogramm.starter.persistence.parameter.entity.Parameter;
 import com.monogramm.starter.persistence.parameter.exception.ParameterNotFoundException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 /**
@@ -165,12 +163,14 @@ public class ParameterServiceImplTest
    * 
    * @throws ParameterNotFoundException if the parameter is not found.
    */
-  @Test(expected = ParameterNotFoundException.class)
+  @Test
   public void testFindByNameParameterNotFoundException() {
-    when(getMockRepository().findByNameIgnoreCase(DUMMY_NAME))
-        .thenThrow(new ParameterNotFoundException());
+    assertThrows(ParameterNotFoundException.class, () -> {
+      when(getMockRepository().findByNameIgnoreCase(DUMMY_NAME))
+          .thenThrow(new ParameterNotFoundException());
 
-    getService().findByName(DUMMY_NAME);
+      getService().findByName(DUMMY_NAME);
+    });
   }
 
 }

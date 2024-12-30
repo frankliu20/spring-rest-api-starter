@@ -36,9 +36,9 @@ public class PermissionDto extends AbstractGenericDto {
     public int compare(AbstractGenericDto o1, AbstractGenericDto o2) {
       final int compare;
 
-      if (o1 instanceof PermissionDto && o2 instanceof PermissionDto) {
+      if (o1 instanceof PermissionDto dto && o2 instanceof PermissionDto dto1) {
         final int compareName =
-            compareOnString(((PermissionDto) o1).getName(), ((PermissionDto) o2).getName());
+            compareOnString(dto.getName(), dto1.getName());
 
         if (compareName != 0) {
           compare = compareName;
@@ -126,8 +126,7 @@ public class PermissionDto extends AbstractGenericDto {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof PermissionDto) {
-      final PermissionDto other = (PermissionDto) obj;
+    if (equals && obj instanceof PermissionDto other) {
       equals = Objects.equals(getName(), other.getName());
     }
 

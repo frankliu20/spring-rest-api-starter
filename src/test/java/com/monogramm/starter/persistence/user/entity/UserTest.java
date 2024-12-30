@@ -4,22 +4,16 @@
 
 package com.monogramm.starter.persistence.user.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.madmath03.password.Passwords;
+import org.junit.jupiter.api.Test;
+
 import com.monogramm.starter.persistence.AbstractGenericEntityTest;
 import com.monogramm.starter.persistence.role.entity.Role;
 
 import java.util.UUID;
-
-import org.junit.Test;
 
 /**
  * {@link User} Unit Test.
@@ -45,6 +39,7 @@ public class UserTest extends AbstractGenericEntityTest<User> {
   }
 
   @Override
+  @Test
   public void testToJson() throws JsonProcessingException {
     super.testToJson();
 
@@ -57,6 +52,7 @@ public class UserTest extends AbstractGenericEntityTest<User> {
   }
 
   @Override
+  @Test
   public void testToString() {
     super.testToString();
 
@@ -69,6 +65,7 @@ public class UserTest extends AbstractGenericEntityTest<User> {
   }
 
   @Override
+  @Test
   public void testHashCode() {
     super.testHashCode();
 
@@ -94,6 +91,7 @@ public class UserTest extends AbstractGenericEntityTest<User> {
   }
 
   @Override
+  @Test
   public void testEqualsObject() {
     super.testEqualsObject();
 

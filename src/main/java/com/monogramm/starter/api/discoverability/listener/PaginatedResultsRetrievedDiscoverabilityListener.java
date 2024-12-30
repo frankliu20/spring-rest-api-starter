@@ -11,9 +11,8 @@ import com.monogramm.starter.api.discoverability.event.PaginatedResultsRetrieved
 import com.monogramm.starter.api.discoverability.utils.LinkUtils;
 import com.monogramm.starter.api.discoverability.utils.LinkUtils.Relation;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -49,7 +48,6 @@ public class PaginatedResultsRetrievedDiscoverabilityListener
    * 
    * @param env application environment properties.
    */
-  @Autowired
   public PaginatedResultsRetrievedDiscoverabilityListener(Environment env) {
     super();
 

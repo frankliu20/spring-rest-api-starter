@@ -4,14 +4,11 @@
 
 package com.monogramm.starter.dto.oauth;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.monogramm.starter.dto.oauth.OAuthRequest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link OAuthRequest} Unit Test.

@@ -4,11 +4,9 @@
 
 package com.monogramm.starter.persistence.type.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,7 +23,7 @@ import com.monogramm.starter.persistence.type.exception.TypeNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 /**
@@ -167,12 +165,14 @@ public class TypeServiceImplTest extends AbstractGenericServiceTest<Type, TypeDt
    * 
    * @throws TypeNotFoundException if the type is not found.
    */
-  @Test(expected = TypeNotFoundException.class)
+  @Test
   public void testFindByNameTypeNotFoundException() {
-    when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
-        .thenThrow(new TypeNotFoundException());
+    assertThrows(TypeNotFoundException.class, () -> {
+      when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
+          .thenThrow(new TypeNotFoundException());
 
-    getService().findByName(DISPLAYNAME);
+      getService().findByName(DISPLAYNAME);
+    });
   }
 
   /**

@@ -4,18 +4,14 @@
 
 package com.monogramm.starter.persistence.user.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.madmath03.password.Passwords;
+import org.junit.jupiter.api.Test;
+
 import com.monogramm.starter.persistence.AbstractGenericEntityBuilderTest;
 import com.monogramm.starter.persistence.role.entity.Role;
 import com.monogramm.starter.persistence.user.entity.User.UserBuilder;
-
-import org.junit.Test;
 
 /**
  * {@link UserBuilder} Unit Test.

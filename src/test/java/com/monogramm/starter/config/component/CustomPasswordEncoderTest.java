@@ -4,13 +4,13 @@
 
 package com.monogramm.starter.config.component;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.madmath03.password.Passwords;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link CustomPasswordEncoder} Unit Test.
@@ -32,7 +32,7 @@ public class CustomPasswordEncoderTest {
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.encoder = new CustomPasswordEncoder();
   }
@@ -40,7 +40,7 @@ public class CustomPasswordEncoderTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.encoder = null;
   }

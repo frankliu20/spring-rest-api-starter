@@ -52,10 +52,9 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
      * Allow all requests here. The security configuration will be done globally by the
      * OAuth2WebSecurityConfig.
      */
-    http.authorizeRequests().antMatchers("/tokens/**").permitAll()
-        .antMatchers(OAuthController.TOKEN_PATH, OAuthController.REVOKE_TOKEN_PATH + "/**",
-            OAuthController.REVOKE_REFRESH_TOKEN_PATH + "/**")
-        .permitAll();
+    http.authorizeRequests(requests -> requests.requestMatchers("/tokens/**").permitAll()
+        .requestMatchers(OAuthController.TOKEN_PATH, OAuthController.REVOKE_TOKEN_PATH + "/**", OAuthController.REVOKE_REFRESH_TOKEN_PATH + "/**")
+        .permitAll());
   }
 
   @Bean

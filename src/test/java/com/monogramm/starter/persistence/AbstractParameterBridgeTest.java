@@ -4,8 +4,8 @@
 
 package com.monogramm.starter.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.monogramm.starter.dto.AbstractParameterDto;
 import com.monogramm.starter.persistence.user.dao.UserRepository;
@@ -14,7 +14,7 @@ import com.monogramm.starter.persistence.user.entity.User;
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link AbstractParameterBridge} Unit Test.

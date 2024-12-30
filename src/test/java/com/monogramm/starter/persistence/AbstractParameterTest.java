@@ -4,25 +4,19 @@
 
 package com.monogramm.starter.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.jupiter.api.Test;
 
 import java.awt.Color;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-import org.junit.Test;
 
 /**
  * {@link AbstractParameter} Unit Test.
@@ -67,6 +61,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   abstract protected T buildTestEntity(T other);
 
   @Override
+  @Test
   public void testToJson() throws JsonProcessingException {
     super.testToJson();
 
@@ -81,6 +76,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   }
 
   @Override
+  @Test
   public void testToString() {
     super.testToString();
 
@@ -95,6 +91,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   }
 
   @Override
+  @Test
   public void testHashCode() {
     assertEquals(this.getEntity().hashCode(), this.getEntity().hashCode());
 
@@ -136,6 +133,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   }
 
   @Override
+  @Test
   public void testEqualsObject() {
     assertEquals(this.getEntity(), this.getEntity());
     assertNotEquals(this.getEntity(), null);
@@ -452,7 +450,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   @Test
   public void testReadValueURL() throws MalformedURLException {
     final String value = "https://uss.enterprise.com";
-    final URL test = new URL(value);
+    final URL test = URI.create(value).toURL();
     this.getEntity().setType(ParameterType.URL);
     this.getEntity().setValue(value);
     assertEquals(test, this.getEntity().readValue());
@@ -464,7 +462,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   @Test
   public void testReadValuePath() {
     final String value = ".";
-    final Path test = Paths.get(value);
+    final Path test = Path.of(value);
     this.getEntity().setType(ParameterType.PATH);
     this.getEntity().setValue(value);
     assertEquals(test, this.getEntity().readValue());
@@ -568,10 +566,12 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   /**
    * Test method for {@link AbstractParameter#readValue()}.
    */
-  @Test(expected = UnsupportedOperationException.class)
+  @Test
   public void testReadValueAny() {
-    this.getEntity().setType(ParameterType.ANY);
-    this.getEntity().readValue();
+    assertThrows(UnsupportedOperationException.class, () -> {
+      this.getEntity().setType(ParameterType.ANY);
+      this.getEntity().readValue();
+    });
   }
 
   /**
@@ -582,7 +582,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   @Test
   public void testWriteValueURL() throws MalformedURLException {
     final String value = "https://uss.enterprise.com";
-    final URL test = new URL(value);
+    final URL test = URI.create(value).toURL();
     this.getEntity().writeValue(test);
     assertEquals(ParameterType.URL, this.getEntity().getType());
     assertEquals(value, this.getEntity().getValue());
@@ -597,7 +597,7 @@ public abstract class AbstractParameterTest<T extends AbstractParameter>
   @Test
   public void testWriteValuePath() {
     final String value = ".";
-    final Path test = Paths.get(value);
+    final Path test = Path.of(value);
     this.getEntity().writeValue(test);
     assertEquals(ParameterType.PATH, this.getEntity().getType());
     assertEquals(value, this.getEntity().getValue());

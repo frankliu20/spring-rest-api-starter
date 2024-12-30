@@ -4,11 +4,9 @@
 
 package com.monogramm.starter.utils.validation;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link PasswordConfirmationDto} Unit Test.
@@ -51,25 +49,31 @@ public class PasswordConfirmationDtoTest {
   /**
    * Test method for {@link PasswordConfirmationDto#PasswordConfirmationDto(char[], char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testPasswordConfirmationDtoNullCharArray() {
-    new PasswordConfirmationDto(null, DROWSSAP);
+    assertThrows(NullPointerException.class, () -> {
+      new PasswordConfirmationDto(null, DROWSSAP);
+    });
   }
 
   /**
    * Test method for {@link PasswordConfirmationDto#PasswordConfirmationDto(char[], char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testPasswordConfirmationDtoCharArrayNull() {
-    new PasswordConfirmationDto(PASSWORD, null);
+    assertThrows(NullPointerException.class, () -> {
+      new PasswordConfirmationDto(PASSWORD, null);
+    });
   }
 
   /**
    * Test method for {@link PasswordConfirmationDto#PasswordConfirmationDto(char[], char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testPasswordConfirmationDtoNullNull() {
-    new PasswordConfirmationDto(null, null);
+    assertThrows(NullPointerException.class, () -> {
+      new PasswordConfirmationDto(null, null);
+    });
   }
 
   /**
@@ -108,11 +112,13 @@ public class PasswordConfirmationDtoTest {
   /**
    * Test method for {@link PasswordConfirmationDto#setPassword(char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testSetPasswordNull() {
-    final PasswordConfirmationDto passwordConfirmationDto = this.buildTestDto();
+    assertThrows(NullPointerException.class, () -> {
+      final PasswordConfirmationDto passwordConfirmationDto = this.buildTestDto();
 
-    passwordConfirmationDto.setPassword(null);
+      passwordConfirmationDto.setPassword(null);
+    });
   }
 
   /**
@@ -151,11 +157,13 @@ public class PasswordConfirmationDtoTest {
   /**
    * Test method for {@link PasswordConfirmationDto#setMatchingPassword(char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testSetMatchingPasswordNull() {
-    final PasswordConfirmationDto passwordConfirmationDto = this.buildTestDto();
+    assertThrows(NullPointerException.class, () -> {
+      final PasswordConfirmationDto passwordConfirmationDto = this.buildTestDto();
 
-    passwordConfirmationDto.setMatchingPassword(null);
+      passwordConfirmationDto.setMatchingPassword(null);
+    });
   }
 
 }

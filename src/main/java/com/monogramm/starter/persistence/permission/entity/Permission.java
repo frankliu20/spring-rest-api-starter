@@ -13,11 +13,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
@@ -203,8 +203,7 @@ public class Permission extends AbstractGenericEntity {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof Permission) {
-      final Permission permission = (Permission) entity;
+    if (entity instanceof Permission permission) {
       
       this.setName(permission.getName());
     }
@@ -227,8 +226,7 @@ public class Permission extends AbstractGenericEntity {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof Permission) {
-      final Permission other = (Permission) obj;
+    if (equals && obj instanceof Permission other) {
       equals = Objects.equals(getName(), other.getName());
     }
 

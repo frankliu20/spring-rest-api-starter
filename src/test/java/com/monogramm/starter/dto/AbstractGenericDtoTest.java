@@ -4,12 +4,7 @@
 
 package com.monogramm.starter.dto;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -19,9 +14,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link AbstractGenericDto} Unit Test.
@@ -72,17 +67,17 @@ public abstract class AbstractGenericDtoTest<T extends AbstractGenericDto> {
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.dto = this.buildTestDto();
 
-    assertNotNull("The tested DTO cannot be null!", dto);
+    assertNotNull(dto, "The tested DTO cannot be null!");
   }
 
   /**
    * @throws java.lang.Exception
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.dto = null;
   }
@@ -413,12 +408,12 @@ public abstract class AbstractGenericDtoTest<T extends AbstractGenericDto> {
     list.add(dto);
     list.add(otherDto);
 
-    assertEquals(dto, list.get(0));
+    assertEquals(dto, list.getFirst());
     assertEquals(otherDto, list.get(1));
 
     Collections.sort(list);
 
-    assertEquals(otherDto, list.get(0));
+    assertEquals(otherDto, list.getFirst());
     assertEquals(dto, list.get(1));
   }
 

@@ -12,7 +12,7 @@ import com.monogramm.starter.api.discoverability.event.ResourceCreatedEvent;
 import java.net.URI;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;

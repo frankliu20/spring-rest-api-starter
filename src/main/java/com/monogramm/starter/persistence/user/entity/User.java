@@ -16,15 +16,15 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PreRemove;
-import javax.persistence.Table;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PreRemove;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user_account")
@@ -491,8 +491,7 @@ public class User extends AbstractGenericEntity {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof User) {
-      final User user = (User) entity;
+    if (entity instanceof User user) {
 
       this.setUsername(user.getUsername());
       this.setEmail(user.getEmail());
@@ -524,8 +523,7 @@ public class User extends AbstractGenericEntity {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof User) {
-      final User other = (User) obj;
+    if (equals && obj instanceof User other) {
       equals = Objects.equals(getUsername(), other.getUsername());
 
       if (equals) {

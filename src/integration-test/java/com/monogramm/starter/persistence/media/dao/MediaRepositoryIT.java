@@ -28,7 +28,6 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +48,7 @@ public class MediaRepositoryIT extends AbstractGenericRepositoryIT<Media, MediaR
   private static final String DISPLAYNAME = MediaRepositoryIT.class.getSimpleName();
 
   private static final String TEST_MEDIA_PATH_VALUE = "data/integration-test/media";
-  private static final Path TEST_MEDIA_PATH = Paths.get(TEST_MEDIA_PATH_VALUE);
+  private static final Path TEST_MEDIA_PATH = Path.of(TEST_MEDIA_PATH_VALUE);
 
   private Path tempDirectory;
   private Path tempFile;

@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -52,7 +51,7 @@ public final class ZipUtils {
    * 
    */
   public static void zip(final String destination, final URI... sources) throws IOException {
-    final File destFile = Paths.get(destination).toFile();
+    final File destFile = Path.of(destination).toFile();
     final Collection<File> srcFiles;
 
     if (sources == null || sources.length == 0) {
@@ -60,7 +59,7 @@ public final class ZipUtils {
     } else {
       srcFiles = new ArrayList<>(sources.length);
       for (final URI src : sources) {
-        srcFiles.add(Paths.get(src).toFile());
+        srcFiles.add(Path.of(src).toFile());
       }
     }
 
@@ -89,7 +88,7 @@ public final class ZipUtils {
    * 
    */
   public static void zip(final String destination, final String... sources) throws IOException {
-    final File destFile = Paths.get(destination).toFile();
+    final File destFile = Path.of(destination).toFile();
     final Collection<File> srcFiles;
 
     if (sources == null || sources.length == 0) {
@@ -97,7 +96,7 @@ public final class ZipUtils {
     } else {
       srcFiles = new ArrayList<>(sources.length);
       for (final String src : sources) {
-        srcFiles.add(Paths.get(src).toFile());
+        srcFiles.add(Path.of(src).toFile());
       }
     }
 
@@ -225,7 +224,7 @@ public final class ZipUtils {
    * 
    */
   public static void unzip(final String destination, final URI... sources) throws IOException {
-    final File destFile = Paths.get(destination).toFile();
+    final File destFile = Path.of(destination).toFile();
     final Collection<File> srcFiles;
 
     if (sources == null || sources.length == 0) {
@@ -233,7 +232,7 @@ public final class ZipUtils {
     } else {
       srcFiles = new ArrayList<>(sources.length);
       for (final URI src : sources) {
-        srcFiles.add(Paths.get(src).toFile());
+        srcFiles.add(Path.of(src).toFile());
       }
     }
 
@@ -263,7 +262,7 @@ public final class ZipUtils {
    * 
    */
   public static void unzip(final String destination, final String... sources) throws IOException {
-    final File destFile = Paths.get(destination).toFile();
+    final File destFile = Path.of(destination).toFile();
     final Collection<File> srcFiles;
 
     if (sources == null || sources.length == 0) {
@@ -271,7 +270,7 @@ public final class ZipUtils {
     } else {
       srcFiles = new ArrayList<>(sources.length);
       for (final String src : sources) {
-        srcFiles.add(Paths.get(src).toFile());
+        srcFiles.add(Path.of(src).toFile());
       }
     }
 
@@ -335,7 +334,7 @@ public final class ZipUtils {
           ZipInputStream zipIn = new ZipInputStream(fis)) {
         final String output;
         if (subFolder) {
-          final Path subFolderPath = Paths.get(destination.getAbsolutePath(),
+          final Path subFolderPath = Path.of(destination.getAbsolutePath(),
               FilenameUtils.getBaseName(srcFile.getName()));
 
           if (!subFolderPath.toFile().exists()) {

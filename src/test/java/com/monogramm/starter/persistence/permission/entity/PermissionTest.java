@@ -4,17 +4,17 @@
 
 package com.monogramm.starter.persistence.permission.entity;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.jupiter.api.Test;
+
 import com.monogramm.starter.persistence.AbstractGenericEntityTest;
 import com.monogramm.starter.persistence.permission.entity.Permission;
 import com.monogramm.starter.persistence.role.entity.Role;
 
 import java.util.Collections;
 import java.util.UUID;
-
-import org.junit.Test;
 
 /**
  * {@link Permission} Unit Test.
@@ -35,6 +35,7 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   }
 
   @Override
+  @Test
   public void testToJson() throws JsonProcessingException {
     super.testToJson();
 
@@ -47,6 +48,7 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   }
 
   @Override
+  @Test
   public void testToString() {
     super.testToString();
 
@@ -59,6 +61,7 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   }
 
   @Override
+  @Test
   public void testHashCode() {
     super.testHashCode();
 
@@ -76,6 +79,7 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   }
 
   @Override
+  @Test
   public void testEqualsObject() {
     super.testEqualsObject();
 
@@ -124,9 +128,11 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   /**
    * Test method for {@link Permission#Permission()}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testPermissionPermissionNull() {
-    new Permission((Permission) null);
+    assertThrows(NullPointerException.class, () -> {
+      new Permission((Permission) null);
+    });
   }
 
   /**
@@ -213,12 +219,14 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   /**
    * Test method for {@link Permission#addRole(com.monogramm.starter.persistence.role.entity.Role)}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testAddRoleNull() {
-    assertNotNull(this.getEntity().getRoles().size());
-    assertEquals(0, this.getEntity().getRoles().size());
+    assertThrows(NullPointerException.class, () -> {
+      assertNotNull(this.getEntity().getRoles().size());
+      assertEquals(0, this.getEntity().getRoles().size());
 
-    this.getEntity().addRole(null);
+      this.getEntity().addRole(null);
+    });
   }
 
   /**
@@ -245,23 +253,27 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   /**
    * Test method for {@link Permission#addRoles(java.util.Collection)}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testAddRolesNull() {
-    assertNotNull(this.getEntity().getRoles().size());
-    assertEquals(0, this.getEntity().getRoles().size());
+    assertThrows(NullPointerException.class, () -> {
+      assertNotNull(this.getEntity().getRoles().size());
+      assertEquals(0, this.getEntity().getRoles().size());
 
-    this.getEntity().addRoles(Collections.singleton(null));
+      this.getEntity().addRoles(Collections.singleton(null));
+    });
   }
 
   /**
    * Test method for {@link Permission#addRoles(java.util.Collection)}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testAddRolesCollectionNull() {
-    assertNotNull(this.getEntity().getRoles().size());
-    assertEquals(0, this.getEntity().getRoles().size());
+    assertThrows(NullPointerException.class, () -> {
+      assertNotNull(this.getEntity().getRoles().size());
+      assertEquals(0, this.getEntity().getRoles().size());
 
-    this.getEntity().addRoles(null);
+      this.getEntity().addRoles(null);
+    });
   }
 
   /**
@@ -333,12 +345,14 @@ public class PermissionTest extends AbstractGenericEntityTest<Permission> {
   /**
    * Test method for {@link Permission#removeRoles(java.util.Collection)}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testRemoveRolesCollectionNull() {
-    assertNotNull(this.getEntity().getRoles().size());
-    assertEquals(0, this.getEntity().getRoles().size());
+    assertThrows(NullPointerException.class, () -> {
+      assertNotNull(this.getEntity().getRoles().size());
+      assertEquals(0, this.getEntity().getRoles().size());
 
-    this.getEntity().removeRoles(null);
+      this.getEntity().removeRoles(null);
+    });
   }
 
 }

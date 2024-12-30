@@ -17,8 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.Test;
-
 /**
  * {@link PasswordResetTokenRepository} Integration Test.
  * 

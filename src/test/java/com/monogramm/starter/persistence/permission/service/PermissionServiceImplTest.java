@@ -4,11 +4,9 @@
 
 package com.monogramm.starter.persistence.permission.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,7 +23,7 @@ import com.monogramm.starter.persistence.permission.exception.PermissionNotFound
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 /**
@@ -168,12 +166,14 @@ public class PermissionServiceImplTest
    * 
    * @throws PermissionNotFoundException if the permission is not found.
    */
-  @Test(expected = PermissionNotFoundException.class)
+  @Test
   public void testFindByNamePermissionNotFoundException() {
-    when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
-        .thenThrow(new PermissionNotFoundException());
+    assertThrows(PermissionNotFoundException.class, () -> {
+      when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
+          .thenThrow(new PermissionNotFoundException());
 
-    getService().findByName(DISPLAYNAME);
+      getService().findByName(DISPLAYNAME);
+    });
   }
 
   /**

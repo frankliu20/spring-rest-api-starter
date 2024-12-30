@@ -6,7 +6,7 @@ package com.monogramm.starter.utils.converter;
 
 import java.time.LocalDate;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Date Converter.
@@ -19,7 +19,7 @@ public class DateConverter implements AttributeConverter<LocalDate, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof LocalDate ? ((LocalDate) object).toString() : null;
+      return object instanceof LocalDate ld ? ld.toString() : null;
     }
 
   }

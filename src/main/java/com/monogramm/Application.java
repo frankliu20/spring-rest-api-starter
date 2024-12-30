@@ -7,7 +7,6 @@ import java.io.OutputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -85,7 +84,6 @@ public class Application {
    * 
    * @param applicationProperties application properties.
    */
-  @Autowired
   public Application(ApplicationProperties applicationProperties) {
     super();
 

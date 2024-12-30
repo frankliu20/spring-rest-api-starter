@@ -11,7 +11,6 @@ import com.monogramm.starter.persistence.user.dao.UserRepository;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +29,6 @@ public class TypeServiceImpl extends AbstractGenericService<Type, TypeDto> imple
    * @param userDao the user repository.
    * @param authenticationFacade a facade to retrieve the authentication object.
    */
-  @Autowired
   public TypeServiceImpl(final TypeRepository typeDao, final UserRepository userDao,
       IAuthenticationFacade authenticationFacade) {
     super(typeDao, userDao, new TypeBridge(userDao), authenticationFacade);

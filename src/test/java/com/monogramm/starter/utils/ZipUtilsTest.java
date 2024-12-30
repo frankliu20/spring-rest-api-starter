@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.utils;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
@@ -15,11 +15,11 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
 
 import org.apache.commons.io.FilenameUtils;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link ZipUtils} Unit Test.
@@ -39,19 +39,19 @@ public class ZipUtilsTest {
   /**
    * @throws java.lang.Exception If test class initialization crashes.
    */
-  @BeforeClass
+  @BeforeAll
   public static void setUpBeforeClass() throws Exception {}
 
   /**
    * @throws java.lang.Exception If test class clean up crashes.
    */
-  @AfterClass
+  @AfterAll
   public static void tearDownAfterClass() throws Exception {}
 
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.tempDirectory = Files.createTempDirectory("ZipUtilsTest_");
     this.tempFile = Files.createTempFile(tempDirectory, "ZipUtilsTest_File_", ".tmp");
@@ -66,7 +66,7 @@ public class ZipUtilsTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Files.deleteIfExists(zipFile);
     Files.walkFileTree(this.unzipDirectory, new FileVisitor<Path>() {

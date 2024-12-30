@@ -53,16 +53,16 @@ public interface IAuthenticationFacade {
 
     if (authentication != null) {
       final Object rawDetails = authentication.getDetails();
-      if (rawDetails instanceof OAuth2AuthenticationDetails) {
+      if (rawDetails instanceof OAuth2AuthenticationDetails authenticationDetails) {
         final Object decodedDetails =
-            ((OAuth2AuthenticationDetails) rawDetails).getDecodedDetails();
+            authenticationDetails.getDecodedDetails();
 
-        if (decodedDetails instanceof Map) {
-          details = (Map<?, ?>) decodedDetails;
+        if (decodedDetails instanceof Map<?,?> map) {
+          details = map;
         }
-      } else if (rawDetails instanceof Map) {
+      } else if (rawDetails instanceof Map<?,?> map) {
         // XXX Mostly for test purpose only
-        details = (Map<?, ?>) rawDetails;
+        details = map;
       }
     }
 
@@ -132,15 +132,15 @@ public interface IAuthenticationFacade {
     if (details.containsKey(CustomTokenEnhancer.UUID)) {
       final Object idValue = details.get(CustomTokenEnhancer.UUID);
 
-      if (idValue instanceof String) {
+      if (idValue instanceof String string) {
         try {
-          principalId = UUID.fromString((String) idValue);
+          principalId = UUID.fromString(string);
         } catch (Exception e) {
           principalId = null;
         }
-      } else if (idValue instanceof UUID) {
+      } else if (idValue instanceof UUID iD) {
         // XXX Mostly for test purpose only
-        principalId = (UUID) idValue;
+        principalId = iD;
       }
     }
 

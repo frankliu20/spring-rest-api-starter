@@ -31,8 +31,8 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
     // First extract the response body
     final Object targetData;
-    if (targetDomainObject instanceof ResponseEntity) {
-      targetData = ((ResponseEntity<?>) targetDomainObject).getBody();
+    if (targetDomainObject instanceof ResponseEntity<?> entity) {
+      targetData = entity.getBody();
     } else {
       targetData = targetDomainObject;
     }

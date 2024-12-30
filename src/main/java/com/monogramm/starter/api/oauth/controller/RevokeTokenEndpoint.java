@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.api.oauth.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.endpoint.FrameworkEndpoint;

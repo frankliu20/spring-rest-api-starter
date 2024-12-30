@@ -12,7 +12,6 @@ import com.monogramm.starter.persistence.user.entity.User;
 import com.monogramm.starter.persistence.user.exception.PasswordResetTokenNotFoundException;
 import com.monogramm.starter.persistence.user.service.PasswordResetTokenService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -43,7 +42,6 @@ public class PasswordResetListener
    * 
    * @throws IllegalArgumentException if any of the parameters is {@code null}.
    */
-  @Autowired
   public PasswordResetListener(PasswordResetTokenService passwordResetTokenService,
       MessageSource messages, JavaMailSender mailSender, EmailProperties emailProperties) {
     super(messages, mailSender, emailProperties);

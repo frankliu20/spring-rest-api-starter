@@ -20,7 +20,6 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,7 +53,6 @@ public class UserServiceImpl extends AbstractGenericService<User, UserDto> imple
    * 
    * @throws IllegalArgumentException if {@code roleDao} is {@code null}.
    */
-  @Autowired
   public UserServiceImpl(final UserRepository userDao, final RoleRepository roleDao,
       ParameterRepository parameterDao, IAuthenticationFacade authenticationFacade) {
     super(userDao, userDao, new UserBridge(userDao, roleDao), authenticationFacade);

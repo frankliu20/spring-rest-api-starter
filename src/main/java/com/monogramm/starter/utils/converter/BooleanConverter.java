@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.utils.converter;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Boolean Converter.
@@ -17,7 +17,7 @@ public class BooleanConverter implements AttributeConverter<Boolean, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof Boolean ? ((Boolean) object).toString() : null;
+      return object instanceof Boolean b ? b.toString() : null;
     }
 
   }

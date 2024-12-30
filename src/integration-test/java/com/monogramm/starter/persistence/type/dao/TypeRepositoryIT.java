@@ -18,7 +18,6 @@ import com.monogramm.starter.persistence.type.exception.TypeNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

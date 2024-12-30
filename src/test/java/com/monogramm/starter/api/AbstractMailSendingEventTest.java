@@ -4,16 +4,16 @@
 
 package com.monogramm.starter.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.monogramm.starter.persistence.user.entity.User;
 
 import java.util.Locale;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * AbstractMailSendingEventTest.
@@ -27,7 +27,7 @@ public abstract class AbstractMailSendingEventTest<T> {
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.event = this.buildTestEvent();
   }
@@ -35,7 +35,7 @@ public abstract class AbstractMailSendingEventTest<T> {
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.event = null;
   }

@@ -11,14 +11,14 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
@@ -310,8 +310,7 @@ public class Role extends AbstractGenericEntity {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof Role) {
-      final Role role = (Role) entity;
+    if (entity instanceof Role role) {
 
       this.setName(role.getName());
       this.clearPermissions();
@@ -336,8 +335,7 @@ public class Role extends AbstractGenericEntity {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof Role) {
-      final Role other = (Role) obj;
+    if (equals && obj instanceof Role other) {
       equals = Objects.equals(getName(), other.getName());
     }
 

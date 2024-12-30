@@ -8,8 +8,8 @@ import com.monogramm.starter.persistence.AbstractToken;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 /**
  * Password Reset Token.

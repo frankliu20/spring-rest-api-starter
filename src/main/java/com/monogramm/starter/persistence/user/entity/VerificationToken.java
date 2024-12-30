@@ -10,9 +10,9 @@ import com.monogramm.starter.persistence.AbstractToken;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 /**
  * Verification Token.
@@ -154,8 +154,7 @@ public class VerificationToken extends AbstractToken {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof VerificationToken) {
-      final VerificationToken verificationToken = (VerificationToken) entity;
+    if (entity instanceof VerificationToken verificationToken) {
 
       this.setField(verificationToken.getField());
       this.setValue(verificationToken.getValue());
@@ -185,8 +184,7 @@ public class VerificationToken extends AbstractToken {
   public boolean equals(Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof VerificationToken) {
-      final VerificationToken other = (VerificationToken) obj;
+    if (equals && obj instanceof VerificationToken other) {
 
       equals = Objects.equals(getField(), other.getField())
           && Objects.equals(getValue(), other.getValue());

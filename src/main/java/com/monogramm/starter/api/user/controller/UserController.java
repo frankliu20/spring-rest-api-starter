@@ -29,12 +29,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -164,7 +163,6 @@ public class UserController extends AbstractGenericController<User, UserDto> {
    * @param verificationTokenService the verification token service.
    * @param passwordResetTokenService the password reset token service.
    */
-  @Autowired
   public UserController(MessageSource messageSource, ApplicationEventPublisher eventPublisher,
       UserService userService, ParameterService parameterService,
       VerificationTokenService verificationTokenService,

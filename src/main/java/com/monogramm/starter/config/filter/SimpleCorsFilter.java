@@ -9,14 +9,14 @@ import com.google.common.net.HttpHeaders;
 import java.io.IOException;
 import java.util.function.Function;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -175,8 +175,7 @@ public class SimpleCorsFilter implements Filter {
       throws IOException, ServletException {
     ServletResponse finalResponse;
 
-    if (response instanceof HttpServletResponse) {
-      final HttpServletResponse httpResponse = (HttpServletResponse) response;
+    if (response instanceof HttpServletResponse httpResponse) {
 
       httpResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, ACCESS_CONTROL_ALLOW_ORIGIN);
       httpResponse.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS,
@@ -188,8 +187,7 @@ public class SimpleCorsFilter implements Filter {
       httpResponse.setHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS,
           listValues(HttpHeaders.LINK, HttpHeaders.LOCATION));
 
-      if (request instanceof HttpServletRequest) {
-        final HttpServletRequest httpRequest = (HttpServletRequest) request;
+      if (request instanceof HttpServletRequest httpRequest) {
 
         if (RequestMethod.OPTIONS.toString().equalsIgnoreCase(httpRequest.getMethod())) {
           // Always return OK for OPTIONS method

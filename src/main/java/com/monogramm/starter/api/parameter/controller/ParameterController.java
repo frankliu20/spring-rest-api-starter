@@ -16,9 +16,8 @@ import com.monogramm.starter.utils.validation.ValidUuid;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
@@ -112,7 +111,6 @@ public class ParameterController extends AbstractGenericController<Parameter, Pa
    * @param eventPublisher the event publisher.
    * @param parameterService the parameter service.
    */
-  @Autowired
   public ParameterController(MessageSource messageSource, ApplicationEventPublisher eventPublisher,
       ParameterService parameterService) {
     super(messageSource, eventPublisher, parameterService);

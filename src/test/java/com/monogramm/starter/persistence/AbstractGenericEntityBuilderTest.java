@@ -4,8 +4,8 @@
 
 package com.monogramm.starter.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.monogramm.starter.persistence.AbstractGenericEntity;
 import com.monogramm.starter.persistence.user.entity.User;
@@ -13,9 +13,9 @@ import com.monogramm.starter.persistence.user.entity.User;
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link AbstractGenericEntityBuilder} Unit Test.
@@ -40,17 +40,17 @@ public abstract class AbstractGenericEntityBuilderTest<
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.entityBuilder = this.buildTestEntityBuilder();
 
-    assertNotNull("The tested entity builder cannot be null!", entityBuilder);
+    assertNotNull(entityBuilder, "The tested entity builder cannot be null!");
   }
 
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.entityBuilder = null;
   }

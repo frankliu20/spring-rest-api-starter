@@ -10,8 +10,8 @@ import com.monogramm.starter.persistence.user.entity.User;
 
 import java.util.Locale;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * {@link OnPasswordResetEvent} Unit Test.
@@ -47,7 +47,7 @@ public class OnPasswordResetEventTest extends AbstractMailSendingEventTest<User>
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.user = new User();
     this.locale = Locale.getDefault();
@@ -59,7 +59,7 @@ public class OnPasswordResetEventTest extends AbstractMailSendingEventTest<User>
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.user = null;
     this.locale = null;

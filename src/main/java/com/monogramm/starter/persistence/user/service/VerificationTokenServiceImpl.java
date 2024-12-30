@@ -11,7 +11,6 @@ import com.monogramm.starter.persistence.user.exception.VerificationTokenNotFoun
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +31,6 @@ public class VerificationTokenServiceImpl
    * @param userDao the user repository.
    * @param authenticationFacade a facade to retrieve the authentication object.
    */
-  @Autowired
   public VerificationTokenServiceImpl(final VerificationTokenRepository verificationTokenDao,
       final UserRepository userDao, IAuthenticationFacade authenticationFacade) {
     super(verificationTokenDao, userDao, new VerificationTokenBridge(userDao),

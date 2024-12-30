@@ -4,13 +4,9 @@
 
 package com.monogramm.starter.persistence.media.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -35,15 +31,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.core.io.Resource;
 
@@ -60,7 +55,7 @@ public class MediaServiceImplTest
   private static final String DISPLAYNAME = MediaServiceImplTest.class.getSimpleName();
 
   private static final String TEST_MEDIA_PATH_VALUE = "data/test/media";
-  private static final Path TEST_MEDIA_PATH = Paths.get(TEST_MEDIA_PATH_VALUE);
+  private static final Path TEST_MEDIA_PATH = Path.of(TEST_MEDIA_PATH_VALUE);
   private static final FileStorageProperties STORAGE_PROPERTIES =
       new FileStorageProperties(TEST_MEDIA_PATH);
 
@@ -73,14 +68,14 @@ public class MediaServiceImplTest
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     super.setUp();
 
     this.tempDirectory = Files.createTempDirectory(PREFIX);
     this.tempFile = Files.createTempFile(tempDirectory, PREFIX, ".tmp");
 
-    this.tempExistingDirectory = Paths.get(ID.toString());
+    this.tempExistingDirectory = Path.of(ID.toString());
     final Path tempExistingDirFullPath =
         Files.createDirectories(TEST_MEDIA_PATH.resolve(tempExistingDirectory));
     this.tempExistingFile = Files.createTempFile(tempExistingDirFullPath, PREFIX, ".tmp");
@@ -89,7 +84,7 @@ public class MediaServiceImplTest
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     super.tearDown();
 
@@ -247,17 +242,19 @@ public class MediaServiceImplTest
     assertFalse(tempExistingDirectory.toFile().exists());
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testDeleteByIdAndOwnerException() {
-    final Media model = this.buildTestEntity();
-    model.setPath(tempExistingDirectory);
-    final UUID ownerId = null;
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(IllegalArgumentException.class, () -> {
+      final Media model = this.buildTestEntity();
+      model.setPath(tempExistingDirectory);
+      final UUID ownerId = null;
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().findByIdAndOwner(ID, owner)).thenReturn(model);
-    doThrow(new IllegalArgumentException()).when(getMockRepository()).delete(model);
+      when(getMockRepository().findByIdAndOwner(ID, owner)).thenReturn(model);
+      doThrow(new IllegalArgumentException()).when(getMockRepository()).delete(model);
 
-    getService().deleteByIdAndOwner(ID, ownerId);
+      getService().deleteByIdAndOwner(ID, ownerId);
+    });
   }
 
   /**
@@ -310,12 +307,14 @@ public class MediaServiceImplTest
    * 
    * @throws MediaNotFoundException if the media is not found.
    */
-  @Test(expected = MediaNotFoundException.class)
+  @Test
   public void testFindByNameMediaNotFoundException() {
-    when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
-        .thenThrow(new MediaNotFoundException());
+    assertThrows(MediaNotFoundException.class, () -> {
+      when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
+          .thenThrow(new MediaNotFoundException());
 
-    getService().findByName(DISPLAYNAME);
+      getService().findByName(DISPLAYNAME);
+    });
   }
 
   /**

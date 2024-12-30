@@ -6,10 +6,10 @@ package com.monogramm.starter.persistence;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.MappedSuperclass;
 
 /**
  * Abstract Parameter entity.
@@ -273,8 +273,7 @@ public abstract class AbstractParameter extends AbstractGenericEntity {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof AbstractParameter) {
-      final AbstractParameter parameter = (AbstractParameter) entity;
+    if (entity instanceof AbstractParameter parameter) {
 
       this.setName(parameter.getName());
       this.setDescription(parameter.getDescription());
@@ -318,8 +317,7 @@ public abstract class AbstractParameter extends AbstractGenericEntity {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof AbstractParameter) {
-      final AbstractParameter other = (AbstractParameter) obj;
+    if (equals && obj instanceof AbstractParameter other) {
       equals = Objects.equals(getName(), other.getName())
           && Objects.equals(getDescription(), other.getDescription())
           && Objects.equals(getType(), other.getType())

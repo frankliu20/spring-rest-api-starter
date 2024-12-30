@@ -40,9 +40,9 @@ public class MediaDto extends AbstractGenericDto {
     public int compare(AbstractGenericDto o1, AbstractGenericDto o2) {
       final int compare;
 
-      if (o1 instanceof MediaDto && o2 instanceof MediaDto) {
+      if (o1 instanceof MediaDto dto && o2 instanceof MediaDto dto1) {
         final int compareName =
-            compareOnString(((MediaDto) o1).getName(), ((MediaDto) o2).getName());
+            compareOnString(dto.getName(), dto1.getName());
 
         if (compareName != 0) {
           compare = compareName;
@@ -279,8 +279,7 @@ public class MediaDto extends AbstractGenericDto {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof MediaDto) {
-      final MediaDto other = (MediaDto) obj;
+    if (equals && obj instanceof MediaDto other) {
       equals = Objects.equals(getName(), other.getName())
           && Objects.equals(getDescription(), other.getDescription())
           && Objects.equals(getStartDate(), other.getStartDate())

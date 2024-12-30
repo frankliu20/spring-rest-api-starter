@@ -4,15 +4,11 @@
 
 package com.monogramm.starter.persistence;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -28,9 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -65,7 +61,7 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     mockUserRepository = mock(UserRepository.class);
     mockRepository = this.buildMockRepository();
@@ -78,7 +74,7 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(mockUserRepository);
 
@@ -354,13 +350,15 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
    * 
    * @throws EntityNotFoundException if the type is not found.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testUpdateNotFound() {
-    final T model = this.buildTestEntity();
+    assertThrows(EntityNotFoundException.class, () -> {
+      final T model = this.buildTestEntity();
 
-    when(mockRepository.update(model)).thenReturn(null);
+      when(mockRepository.update(model)).thenReturn(null);
 
-    service.update(model);
+      service.update(model);
+    });
   }
 
   /**
@@ -369,13 +367,15 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
    * 
    * @throws EntityNotFoundException if the type is not found.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testUpdateEntityNotFoundException() {
-    final T model = this.buildTestEntity();
+    assertThrows(EntityNotFoundException.class, () -> {
+      final T model = this.buildTestEntity();
 
-    when(mockRepository.update(model)).thenThrow(this.buildEntityNotFoundException());
+      when(mockRepository.update(model)).thenThrow(this.buildEntityNotFoundException());
 
-    service.update(model);
+      service.update(model);
+    });
   }
 
   /**
@@ -403,14 +403,16 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
    * 
    * @throws EntityNotFoundException if the type is not found.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testUpdateByOwnerNotOwner() {
-    final T model = this.buildTestEntity();
-    final UUID ownerId = null;
+    assertThrows(EntityNotFoundException.class, () -> {
+      final T model = this.buildTestEntity();
+      final UUID ownerId = null;
 
-    when(mockRepository.updateByOwner(eq(model), any(User.class))).thenReturn(null);
+      when(mockRepository.updateByOwner(eq(model), any(User.class))).thenReturn(null);
 
-    service.updateByOwner(model, ownerId);
+      service.updateByOwner(model, ownerId);
+    });
   }
 
   /**
@@ -433,11 +435,13 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
    * 
    * @throws EntityNotFoundException if the type is not found.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testDeleteByIdNotFound() {
-    when(mockRepository.deleteById(ID)).thenReturn(null);
+    assertThrows(EntityNotFoundException.class, () -> {
+      when(mockRepository.deleteById(ID)).thenReturn(null);
 
-    service.deleteById(ID);
+      service.deleteById(ID);
+    });
   }
 
   /**
@@ -445,11 +449,13 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
    * 
    * @throws EntityNotFoundException if the type is not found.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testDeleteByIdNoDeletion() {
-    when(mockRepository.deleteById(ID)).thenReturn(0);
+    assertThrows(EntityNotFoundException.class, () -> {
+      when(mockRepository.deleteById(ID)).thenReturn(0);
 
-    service.deleteById(ID);
+      service.deleteById(ID);
+    });
   }
 
   /**
@@ -457,11 +463,13 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
    * 
    * @throws EntityNotFoundException if the type is not found.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testDeleteByIdEntityNotFoundException() {
-    when(mockRepository.deleteById(ID)).thenThrow(this.buildEntityNotFoundException());
+    assertThrows(EntityNotFoundException.class, () -> {
+      when(mockRepository.deleteById(ID)).thenThrow(this.buildEntityNotFoundException());
 
-    service.deleteById(ID);
+      service.deleteById(ID);
+    });
   }
 
   /**
@@ -486,13 +494,15 @@ public abstract class AbstractGenericServiceTest<T extends AbstractGenericEntity
    * 
    * @throws EntityNotFoundException if the type is not found.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testDeleteByIdAndOwnerNotOwner() {
-    final UUID ownerId = null;
+    assertThrows(EntityNotFoundException.class, () -> {
+      final UUID ownerId = null;
 
-    when(mockRepository.deleteByIdAndOwner(eq(ID), any(User.class))).thenReturn(0);
+      when(mockRepository.deleteByIdAndOwner(eq(ID), any(User.class))).thenReturn(0);
 
-    service.deleteByIdAndOwner(ID, ownerId);
+      service.deleteByIdAndOwner(ID, ownerId);
+    });
   }
 
 }

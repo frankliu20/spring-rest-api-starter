@@ -4,21 +4,16 @@
 
 package com.monogramm.starter.persistence.media.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.jupiter.api.Test;
+
 import com.monogramm.starter.persistence.AbstractGenericEntityTest;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.UUID;
-
-import org.junit.Test;
 
 /**
  * {@link Media} Unit Test.
@@ -41,6 +36,7 @@ public class MediaTest extends AbstractGenericEntityTest<Media> {
   }
 
   @Override
+  @Test
   public void testToJson() throws JsonProcessingException {
     super.testToJson();
 
@@ -49,6 +45,7 @@ public class MediaTest extends AbstractGenericEntityTest<Media> {
   }
 
   @Override
+  @Test
   public void testToString() {
     super.testToString();
 
@@ -57,6 +54,7 @@ public class MediaTest extends AbstractGenericEntityTest<Media> {
   }
 
   @Override
+  @Test
   public void testHashCode() {
     super.testHashCode();
 
@@ -93,6 +91,7 @@ public class MediaTest extends AbstractGenericEntityTest<Media> {
   }
 
   @Override
+  @Test
   public void testEqualsObject() {
     super.testEqualsObject();
 
@@ -162,9 +161,11 @@ public class MediaTest extends AbstractGenericEntityTest<Media> {
   /**
    * Test method for {@link Media#Media()}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testMediaMediaNull() {
-    new Media((Media) null);
+    assertThrows(NullPointerException.class, () -> {
+      new Media((Media) null);
+    });
   }
 
   /**
@@ -273,7 +274,7 @@ public class MediaTest extends AbstractGenericEntityTest<Media> {
   @Test
   public void testSetPathPath() {
     final String pathStr = UUID.randomUUID().toString();
-    final Path path = Paths.get(pathStr);
+    final Path path = Path.of(pathStr);
 
     this.getEntity().setPath(path);
 

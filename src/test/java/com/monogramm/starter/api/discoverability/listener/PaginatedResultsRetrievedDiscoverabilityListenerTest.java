@@ -4,9 +4,10 @@
 
 package com.monogramm.starter.api.discoverability.listener;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -15,11 +16,11 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import com.google.common.net.HttpHeaders;
 import com.monogramm.starter.api.discoverability.event.PaginatedResultsRetrievedEvent;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.core.env.Environment;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -50,7 +51,7 @@ public class PaginatedResultsRetrievedDiscoverabilityListenerTest {
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.requestUrl = "https://dummy.company.com/api/resources/";
     this.uriBuilder = new UriComponentsBuilder() {};
@@ -68,7 +69,7 @@ public class PaginatedResultsRetrievedDiscoverabilityListenerTest {
   /**
    * @throws java.lang.Exception
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.uriBuilder = null;
     this.page = -1;
@@ -97,14 +98,16 @@ public class PaginatedResultsRetrievedDiscoverabilityListenerTest {
    * Test method for
    * {@link PaginatedResultsRetrievedDiscoverabilityListener#onApplicationEvent(com.monogramm.starter.api.discoverability.event.PaginatedResultsRetrievedEvent)}.
    */
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void testOnApplicationEvent() {
-    // Mock
-    final PaginatedResultsRetrievedEvent event =
-        new PaginatedResultsRetrievedEvent(response, uriBuilder, page, totalPages, pageSize);
+    assertThrows(IllegalStateException.class, () -> {
+      // Mock
+      final PaginatedResultsRetrievedEvent event =
+          new PaginatedResultsRetrievedEvent(response, uriBuilder, page, totalPages, pageSize);
 
-    // Operation
-    this.listener.onApplicationEvent(event);
+      // Operation
+      this.listener.onApplicationEvent(event);
+    });
   }
 
   /**

@@ -4,9 +4,7 @@
 
 package com.monogramm.starter.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import com.monogramm.starter.dto.AbstractTokenDto;
@@ -16,7 +14,7 @@ import com.monogramm.starter.persistence.user.entity.User;
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link AbstractTokenBridge} Unit Test.

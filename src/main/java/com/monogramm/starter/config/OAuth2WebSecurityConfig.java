@@ -4,6 +4,8 @@
 
 package com.monogramm.starter.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import com.monogramm.starter.api.media.controller.MediaController;
 import com.monogramm.starter.config.component.CustomPasswordEncoder;
 import com.monogramm.starter.config.filter.JsonToUrlEncodedAuthenticationFilter;
@@ -89,7 +91,7 @@ public class OAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .passwordEncoder(new CustomPasswordEncoder());
   }
 
-  @Override
+  /*~~(Migrate manually based on https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter)~~>*/@Override
   @Bean
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
@@ -97,14 +99,14 @@ public class OAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(final HttpSecurity http) throws Exception {
-    http.addFilterBefore(jsonFilter, ChannelProcessingFilter.class).csrf().and().httpBasic()
-        .disable().authorizeRequests().anyRequest().authenticated().and().formLogin().permitAll();
+    http.addFilterBefore(jsonFilter, ChannelProcessingFilter.class).csrf(withDefaults()).httpBasic(basic -> basic
+        .disable()).authorizeRequests(requests -> requests.anyRequest().authenticated()).formLogin(login -> login.permitAll());
   }
 
   @Override
   public void configure(final WebSecurity web) throws Exception {
     web.debug(applicationSecurityProperties.isDebug()).ignoring()
-        .antMatchers(MediaController.DOWNLOAD_PATH + "/**");
+        .requestMatchers(MediaController.DOWNLOAD_PATH + "/**");
   }
 
   // JDBC configuration

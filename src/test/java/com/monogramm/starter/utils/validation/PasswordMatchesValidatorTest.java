@@ -4,15 +4,15 @@
 
 package com.monogramm.starter.utils.validation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidatorContext;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -32,7 +32,7 @@ public class PasswordMatchesValidatorTest {
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.constraintAnnotation = mock(PasswordMatches.class);
     this.context = mock(ConstraintValidatorContext.class);
@@ -43,7 +43,7 @@ public class PasswordMatchesValidatorTest {
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(context);
 

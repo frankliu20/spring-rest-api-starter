@@ -4,10 +4,7 @@
 
 package com.monogramm.starter.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jayway.awaitility.Awaitility;
@@ -17,9 +14,9 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,17 +59,17 @@ public abstract class AbstractGenericEntityTest<T extends AbstractGenericEntity>
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.entity = this.buildTestEntity();
 
-    assertNotNull("The tested entity cannot be null!", entity);
+    assertNotNull(entity, "The tested entity cannot be null!");
   }
 
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.entity = null;
   }
@@ -240,9 +237,10 @@ public abstract class AbstractGenericEntityTest<T extends AbstractGenericEntity>
   /**
    * Test method for {@link AbstractGenericEntity#update(AbstractGenericEntity))}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testUpdateNull() {
-    entity.update(null);
+    assertThrows(NullPointerException.class, () ->
+      entity.update(null));
   }
 
   /**

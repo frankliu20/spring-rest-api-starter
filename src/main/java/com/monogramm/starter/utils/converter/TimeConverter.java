@@ -6,7 +6,7 @@ package com.monogramm.starter.utils.converter;
 
 import java.time.LocalTime;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Time Converter.
@@ -19,7 +19,7 @@ public class TimeConverter implements AttributeConverter<LocalTime, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof LocalTime ? ((LocalTime) object).toString() : null;
+      return object instanceof LocalTime lt ? lt.toString() : null;
     }
 
   }

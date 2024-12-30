@@ -6,7 +6,7 @@ package com.monogramm.starter.utils.converter;
 
 import com.monogramm.starter.utils.JsonUtils;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Any Converter.

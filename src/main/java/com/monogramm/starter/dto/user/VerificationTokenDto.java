@@ -107,8 +107,7 @@ public class VerificationTokenDto extends AbstractTokenDto {
   public boolean equals(Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof VerificationTokenDto) {
-      final VerificationTokenDto other = (VerificationTokenDto) obj;
+    if (equals && obj instanceof VerificationTokenDto other) {
 
       equals = Objects.equals(getField(), other.getField())
           && Objects.equals(getValue(), other.getValue());

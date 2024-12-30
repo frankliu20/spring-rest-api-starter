@@ -4,12 +4,11 @@
 
 package com.monogramm.starter.api;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -30,13 +29,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.context.ApplicationEventPublisher;
@@ -96,19 +95,19 @@ public abstract class AbstractGenericControllerTest<T extends AbstractGenericEnt
   /**
    * @throws java.lang.Exception
    */
-  @BeforeClass
+  @BeforeAll
   public static void setUpBeforeClass() throws Exception {}
 
   /**
    * @throws java.lang.Exception
    */
-  @AfterClass
+  @AfterAll
   public static void tearDownAfterClass() throws Exception {}
 
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.messageSource = this.buildMessageSource();
     assertNotNull(this.messageSource);
@@ -140,7 +139,7 @@ public abstract class AbstractGenericControllerTest<T extends AbstractGenericEnt
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(messageSource);
     Mockito.reset(eventPublisher);
@@ -367,22 +366,25 @@ public abstract class AbstractGenericControllerTest<T extends AbstractGenericEnt
    * Test method for
    * {@link AbstractGenericController#getDataById(String, WebRequest, HttpServletResponse)}.
    */
-  @Test(expected = EntityNotFoundException.class)
+  @Test
   public void testGetDataByIdStringNotFound() {
-    final T model = null;
+    assertThrows(EntityNotFoundException.class, () -> {
+      final T model = null;
 
-    when(mockService.findById(RANDOM_ID)).thenReturn(model);
+      when(mockService.findById(RANDOM_ID)).thenReturn(model);
 
-    controller.getDataById(RANDOM_ID.toString(), mockRequest, mockResponse);
+      controller.getDataById(RANDOM_ID.toString(), mockRequest, mockResponse);
+    });
   }
 
   /**
    * Test method for
    * {@link AbstractGenericController#getDataById(String, WebRequest, HttpServletResponse)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testGetDataByIdStringIllegal() {
-    controller.getDataById("this_is_not_a_UUID", mockRequest, mockResponse);
+    assertThrows(IllegalArgumentException.class, () ->
+      controller.getDataById("this_is_not_a_UUID", mockRequest, mockResponse));
   }
 
 
@@ -751,38 +753,42 @@ public abstract class AbstractGenericControllerTest<T extends AbstractGenericEnt
    * Test method for
    * {@link AbstractGenericController#getAllDataPaginated(String, int, int, Authentication, WebRequest, UriComponentsBuilder, HttpServletResponse)}.
    */
-  @Test(expected = PageNotFoundException.class)
+  @Test
   public void testGetAllDataPaginatedEmpty() {
-    final Page<T> models = new PageImpl<T>(Collections.emptyList());
-    int page = 42;
-    int size = 2;
+    assertThrows(PageNotFoundException.class, () -> {
+      final Page<T> models = new PageImpl<T>(Collections.emptyList());
+      int page = 42;
+      int size = 2;
 
-    final Collection<GrantedAuthority> userAuthorities = this.adminAuthorities();
-    when(mockAuthentication.getAuthorities()).then(invocation -> userAuthorities);
-    when(mockAuthentication.getDetails()).thenReturn(null);
-    when(mockService.findAll(page, size)).thenReturn(models);
+      final Collection<GrantedAuthority> userAuthorities = this.adminAuthorities();
+      when(mockAuthentication.getAuthorities()).then(invocation -> userAuthorities);
+      when(mockAuthentication.getDetails()).thenReturn(null);
+      when(mockService.findAll(page, size)).thenReturn(models);
 
-    controller.getAllDataPaginated(null, page, size, mockAuthentication, mockRequest, uriBuilder,
-        mockResponse);
+      controller.getAllDataPaginated(null, page, size, mockAuthentication, mockRequest, uriBuilder,
+          mockResponse);
+    });
   }
 
   /**
    * Test method for
    * {@link AbstractGenericController#getAllDataPaginated(String, int, int, Authentication, WebRequest, UriComponentsBuilder, HttpServletResponse)}.
    */
-  @Test(expected = PageNotFoundException.class)
+  @Test
   public void testGetAllDataPaginatedNull() {
-    final Page<T> models = null;
-    int page = 42;
-    int size = 2;
+    assertThrows(PageNotFoundException.class, () -> {
+      final Page<T> models = null;
+      int page = 42;
+      int size = 2;
 
-    final Collection<GrantedAuthority> userAuthorities = this.adminAuthorities();
-    when(mockAuthentication.getAuthorities()).then(invocation -> userAuthorities);
-    when(mockAuthentication.getDetails()).thenReturn(null);
-    when(mockService.findAll(page, size)).thenReturn(models);
+      final Collection<GrantedAuthority> userAuthorities = this.adminAuthorities();
+      when(mockAuthentication.getAuthorities()).then(invocation -> userAuthorities);
+      when(mockAuthentication.getDetails()).thenReturn(null);
+      when(mockService.findAll(page, size)).thenReturn(models);
 
-    controller.getAllDataPaginated(null, page, size, mockAuthentication, mockRequest, uriBuilder,
-        mockResponse);
+      controller.getAllDataPaginated(null, page, size, mockAuthentication, mockRequest, uriBuilder,
+          mockResponse);
+    });
   }
 
 
@@ -1199,9 +1205,10 @@ public abstract class AbstractGenericControllerTest<T extends AbstractGenericEnt
   /**
    * Test method for {@link AbstractGenericController#deleteData(java.lang.String)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testDeleteDataIdIllegal() {
-    controller.deleteData(mockAuthentication, "this_is_not_a_UUID");
+    assertThrows(IllegalArgumentException.class, () ->
+      controller.deleteData(mockAuthentication, "this_is_not_a_UUID"));
   }
 
 }

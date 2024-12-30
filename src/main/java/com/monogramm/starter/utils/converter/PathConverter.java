@@ -5,9 +5,8 @@
 package com.monogramm.starter.utils.converter;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Path Converter.
@@ -20,7 +19,7 @@ public class PathConverter implements AttributeConverter<Path, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof Path ? ((Path) object).toString() : null;
+      return object instanceof Path p ? p.toString() : null;
     }
 
   }
@@ -29,7 +28,7 @@ public class PathConverter implements AttributeConverter<Path, String> {
 
     @Override
     public Path apply(String value) {
-      return value != null ? Paths.get(value) : null;
+      return value != null ? Path.of(value) : null;
     }
 
   }

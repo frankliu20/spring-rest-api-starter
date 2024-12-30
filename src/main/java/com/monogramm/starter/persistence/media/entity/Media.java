@@ -13,10 +13,10 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 /**
  * Media.
@@ -265,8 +265,7 @@ public class Media extends AbstractGenericEntity {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof Media) {
-      final Media media = (Media) entity;
+    if (entity instanceof Media media) {
 
       // Name and path updates are forbidden and will be ignored
       this.setDescription(media.getDescription());
@@ -316,8 +315,7 @@ public class Media extends AbstractGenericEntity {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof Media) {
-      final Media other = (Media) obj;
+    if (equals && obj instanceof Media other) {
       equals = Objects.equals(getName(), other.getName())
           && Objects.equals(getDescription(), other.getDescription())
           && Objects.equals(getStartDate(), other.getStartDate())

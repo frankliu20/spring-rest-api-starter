@@ -4,10 +4,7 @@
 
 package com.monogramm.starter.api.media.controller;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -34,13 +31,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +74,7 @@ public class MediaControllerTest extends AbstractGenericControllerTest<Media, Me
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     super.setUp();
 
@@ -98,7 +95,7 @@ public class MediaControllerTest extends AbstractGenericControllerTest<Media, Me
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(getMockService());
     this.setBridge(null);
@@ -183,7 +180,7 @@ public class MediaControllerTest extends AbstractGenericControllerTest<Media, Me
 
   /**
    * Test method for
-   * {@link MediaController#downloadMediaById(String, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)}.
+   * {@link MediaController#downloadMediaById(String, jakarta.servlet.http.HttpServletRequest, jakarta.servlet.http.HttpServletResponse)}.
    * 
    * @throws IOException
    * @throws FileNotFoundException

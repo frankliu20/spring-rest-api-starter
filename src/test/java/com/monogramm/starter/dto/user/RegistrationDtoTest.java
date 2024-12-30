@@ -4,14 +4,11 @@
 
 package com.monogramm.starter.dto.user;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.monogramm.starter.utils.validation.PasswordConfirmationDtoTest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link RegistrationDto} Unit Test.
@@ -67,27 +64,33 @@ public class RegistrationDtoTest extends PasswordConfirmationDtoTest {
    * Test method for
    * {@link RegistrationDto#RegistrationDto(java.lang.String, java.lang.String, char[], char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testRegistrationDtoStringStringNullCharArray() {
-    new RegistrationDto(USERNAME, EMAIL, null, DROWSSAP);
+    assertThrows(NullPointerException.class, () -> {
+      new RegistrationDto(USERNAME, EMAIL, null, DROWSSAP);
+    });
   }
 
   /**
    * Test method for
    * {@link RegistrationDto#RegistrationDto(java.lang.String, java.lang.String, char[], char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testRegistrationDtoStringStringCharArrayNull() {
-    new RegistrationDto(USERNAME, EMAIL, PASSWORD, null);
+    assertThrows(NullPointerException.class, () -> {
+      new RegistrationDto(USERNAME, EMAIL, PASSWORD, null);
+    });
   }
 
   /**
    * Test method for
    * {@link RegistrationDto#RegistrationDto(java.lang.String, java.lang.String, char[], char[])}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testRegistrationDtoStringStringNullNull() {
-    new RegistrationDto(USERNAME, EMAIL, null, null);
+    assertThrows(NullPointerException.class, () -> {
+      new RegistrationDto(USERNAME, EMAIL, null, null);
+    });
   }
 
   /**

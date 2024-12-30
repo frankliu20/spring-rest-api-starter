@@ -17,16 +17,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletResponse;
 
 import org.apache.catalina.connector.RequestFacade;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.mock.web.DelegatingServletInputStream;
 
@@ -63,7 +63,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
   /**
    * @throws java.lang.Exception If test class initialization crashes.
    */
-  @BeforeClass
+  @BeforeAll
   public static void setUpBeforeClass() throws Exception {
     // Construct a Map then convert it to an InputStream
     DATA.put(DUMMY_PARAM, DUMMY_VALUE);
@@ -74,7 +74,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
   /**
    * @throws java.lang.Exception If test class clean up crashes.
    */
-  @AfterClass
+  @AfterAll
   public static void tearDownAfterClass() throws Exception {
     DATA.clear();
   }
@@ -82,7 +82,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.filter = new JsonToUrlEncodedAuthenticationFilter();
 
@@ -109,7 +109,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.filter = null;
 
@@ -134,7 +134,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
   }
 
   /**
-   * Test method for {@link JsonToUrlEncodedAuthenticationFilter#init(javax.servlet.FilterConfig)}.
+   * Test method for {@link JsonToUrlEncodedAuthenticationFilter#init(jakarta.servlet.FilterConfig)}.
    * 
    * @throws ServletException if the initialization crashed.
    */
@@ -145,7 +145,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
 
   /**
    * Test method for
-   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -171,7 +171,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
 
   /**
    * Test method for
-   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -197,7 +197,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
 
   /**
    * Test method for
-   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -223,7 +223,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
 
   /**
    * Test method for
-   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -249,7 +249,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
 
   /**
    * Test method for
-   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -272,7 +272,7 @@ public class JsonToUrlEncodedAuthenticationFilterTest {
 
   /**
    * Test method for
-   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link JsonToUrlEncodedAuthenticationFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason

@@ -16,7 +16,6 @@ import com.monogramm.starter.persistence.parameter.entity.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

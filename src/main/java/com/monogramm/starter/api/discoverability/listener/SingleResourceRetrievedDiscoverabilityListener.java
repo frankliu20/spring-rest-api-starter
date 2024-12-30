@@ -13,7 +13,7 @@ import com.monogramm.starter.api.discoverability.utils.LinkUtils.Relation;
 
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;

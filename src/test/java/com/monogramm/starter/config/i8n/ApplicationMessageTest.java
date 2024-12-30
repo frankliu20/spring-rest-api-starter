@@ -4,11 +4,11 @@
 
 package com.monogramm.starter.config.i8n;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.MessageSource;
 
 /**
@@ -23,7 +23,7 @@ public class ApplicationMessageTest {
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.message = new ApplicationMessage();
   }
@@ -31,7 +31,7 @@ public class ApplicationMessageTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.message = null;
   }

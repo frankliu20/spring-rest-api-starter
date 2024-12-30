@@ -6,8 +6,8 @@ import com.monogramm.starter.persistence.role.entity.Role;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.NonUniqueResultException;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

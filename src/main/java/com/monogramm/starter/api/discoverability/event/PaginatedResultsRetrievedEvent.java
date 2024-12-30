@@ -7,7 +7,7 @@ package com.monogramm.starter.api.discoverability.event;
 import com.monogramm.starter.api.AbstractGenericController;
 import com.monogramm.starter.persistence.AbstractGenericEntity;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.web.util.UriComponentsBuilder;
 

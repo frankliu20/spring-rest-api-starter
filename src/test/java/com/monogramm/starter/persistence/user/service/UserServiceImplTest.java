@@ -4,13 +4,9 @@
 
 package com.monogramm.starter.persistence.user.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -34,9 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
@@ -60,7 +56,7 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     roleDao = mock(RoleRepository.class);
     parameterDao = mock(ParameterRepository.class);
@@ -72,7 +68,7 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     super.tearDown();
     Mockito.reset(roleDao);
@@ -182,18 +178,22 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * Test method for
    * {@link UserServiceImpl#UserService(UserRepository, RoleRepository, ParameterRepository, com.monogramm.starter.config.security.IAuthenticationFacade)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testUserServiceIRoleRepositoryNullNull() {
-    new UserServiceImpl(getMockRepository(), null, null, getMockAuthenticationFacade());
+    assertThrows(IllegalArgumentException.class, () -> {
+      new UserServiceImpl(getMockRepository(), null, null, getMockAuthenticationFacade());
+    });
   }
 
   /**
    * Test method for
    * {@link UserServiceImpl#UserService(UserRepository, RoleRepository, ParameterRepository, com.monogramm.starter.config.security.IAuthenticationFacade)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testUserServiceIRoleRepositoryRoleRepositoryNull() {
-    new UserServiceImpl(getMockRepository(), roleDao, null, getMockAuthenticationFacade());
+    assertThrows(IllegalArgumentException.class, () -> {
+      new UserServiceImpl(getMockRepository(), roleDao, null, getMockAuthenticationFacade());
+    });
   }
 
   /**
@@ -306,12 +306,14 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if no user matches the username in the repository.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testFindByUsernameNotFoundException() {
-    when(getMockRepository().findByUsernameIgnoreCase(USERNAME))
-        .thenThrow(new UserNotFoundException());
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().findByUsernameIgnoreCase(USERNAME))
+          .thenThrow(new UserNotFoundException());
 
-    getService().findByUsername(USERNAME);
+      getService().findByUsername(USERNAME);
+    });
   }
 
   /**
@@ -355,11 +357,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if no user matches the email in the repository.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testFindByEmailNotFoundException() {
-    when(getMockRepository().findByEmailIgnoreCase(EMAIL)).thenThrow(new UserNotFoundException());
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().findByEmailIgnoreCase(EMAIL)).thenThrow(new UserNotFoundException());
 
-    getService().findByEmail(EMAIL);
+      getService().findByEmail(EMAIL);
+    });
   }
 
   /**
@@ -421,13 +425,15 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testUpdateNotFoundException() {
-    final User model = this.buildTestEntity();
+    assertThrows(UserNotFoundException.class, () -> {
+      final User model = this.buildTestEntity();
 
-    when(getMockRepository().update(model)).thenThrow(new UserNotFoundException());
+      when(getMockRepository().update(model)).thenThrow(new UserNotFoundException());
 
-    getService().update(model);
+      getService().update(model);
+    });
   }
 
 
@@ -456,11 +462,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetPasswordNotFound() {
-    when(getMockRepository().setPassword(ID, password)).thenReturn(null);
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setPassword(ID, password)).thenReturn(null);
 
-    getService().setPassword(ID, password);
+      getService().setPassword(ID, password);
+    });
   }
 
   /**
@@ -468,11 +476,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetPasswordNotFoundException() {
-    when(getMockRepository().setPassword(ID, password)).thenThrow(new UserNotFoundException());
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setPassword(ID, password)).thenThrow(new UserNotFoundException());
 
-    getService().setPassword(ID, password);
+      getService().setPassword(ID, password);
+    });
   }
 
 
@@ -502,14 +512,16 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetPasswordByOwnerNotFound() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setPasswordByOwner(ID, password, owner)).thenReturn(null);
+      when(getMockRepository().setPasswordByOwner(ID, password, owner)).thenReturn(null);
 
-    getService().setPasswordByOwner(ID, password, ownerId);
+      getService().setPasswordByOwner(ID, password, ownerId);
+    });
   }
 
   /**
@@ -517,15 +529,17 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetPasswordByOwnerNotFoundException() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setPasswordByOwner(ID, password, owner))
-        .thenThrow(new UserNotFoundException());
+      when(getMockRepository().setPasswordByOwner(ID, password, owner))
+          .thenThrow(new UserNotFoundException());
 
-    getService().setPasswordByOwner(ID, password, ownerId);
+      getService().setPasswordByOwner(ID, password, ownerId);
+    });
   }
 
 
@@ -554,11 +568,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetEnabledNotFound() {
-    when(getMockRepository().setEnabled(ID, false)).thenReturn(null);
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setEnabled(ID, false)).thenReturn(null);
 
-    getService().setEnabled(ID, false);
+      getService().setEnabled(ID, false);
+    });
   }
 
   /**
@@ -566,11 +582,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetEnabledNotFoundException() {
-    when(getMockRepository().setEnabled(ID, false)).thenThrow(new UserNotFoundException());
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setEnabled(ID, false)).thenThrow(new UserNotFoundException());
 
-    getService().setEnabled(ID, false);
+      getService().setEnabled(ID, false);
+    });
   }
 
 
@@ -600,14 +618,16 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetEnabledByOwnerNotFound() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setEnabledByOwner(ID, false, owner)).thenReturn(null);
+      when(getMockRepository().setEnabledByOwner(ID, false, owner)).thenReturn(null);
 
-    getService().setEnabledByOwner(ID, false, ownerId);
+      getService().setEnabledByOwner(ID, false, ownerId);
+    });
   }
 
   /**
@@ -615,15 +635,17 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testSetEnabledByOwnerNotFoundException() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setEnabledByOwner(ID, false, owner))
-        .thenThrow(new UserNotFoundException());
+      when(getMockRepository().setEnabledByOwner(ID, false, owner))
+          .thenThrow(new UserNotFoundException());
 
-    getService().setEnabledByOwner(ID, false, ownerId);
+      getService().setEnabledByOwner(ID, false, ownerId);
+    });
   }
 
 
@@ -652,11 +674,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testEnableNotFound() {
-    when(getMockRepository().setEnabled(ID, true)).thenReturn(null);
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setEnabled(ID, true)).thenReturn(null);
 
-    getService().enable(ID);
+      getService().enable(ID);
+    });
   }
 
   /**
@@ -664,11 +688,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testEnableNotFoundException() {
-    when(getMockRepository().setEnabled(ID, true)).thenThrow(new UserNotFoundException());
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setEnabled(ID, true)).thenThrow(new UserNotFoundException());
 
-    getService().enable(ID);
+      getService().enable(ID);
+    });
   }
 
 
@@ -698,14 +724,16 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testEnableByOwnerNotFound() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setEnabledByOwner(ID, true, owner)).thenReturn(null);
+      when(getMockRepository().setEnabledByOwner(ID, true, owner)).thenReturn(null);
 
-    getService().enableByOwner(ID, ownerId);
+      getService().enableByOwner(ID, ownerId);
+    });
   }
 
   /**
@@ -713,15 +741,17 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testEnableByOwnerNotFoundException() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setEnabledByOwner(ID, true, owner))
-        .thenThrow(new UserNotFoundException());
+      when(getMockRepository().setEnabledByOwner(ID, true, owner))
+          .thenThrow(new UserNotFoundException());
 
-    getService().enableByOwner(ID, ownerId);
+      getService().enableByOwner(ID, ownerId);
+    });
   }
 
 
@@ -792,19 +822,21 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws RoleNotFoundException if the default role is not found.
    */
-  @Test(expected = RoleNotFoundException.class)
+  @Test
   public void testRegisterRoleNotFoundException() {
-    final RegistrationDto model = new RegistrationDto();
-    model.setUsername(USERNAME);
-    model.setEmail(EMAIL);
-    model.setPassword(PASSWORD);
-    model.setMatchingPassword(PASSWORD);
+    assertThrows(RoleNotFoundException.class, () -> {
+      final RegistrationDto model = new RegistrationDto();
+      model.setUsername(USERNAME);
+      model.setEmail(EMAIL);
+      model.setPassword(PASSWORD);
+      model.setMatchingPassword(PASSWORD);
 
-    when(getMockRepository().exists(null, model.getUsername(), model.getEmail())).thenReturn(false);
-    when(parameterDao.findByNameIgnoreCase("DEFAULT_ROLE")).thenReturn(Parameter.builder().build());
-    when(roleDao.findByNameIgnoreCase(null)).thenThrow(new RoleNotFoundException());
+      when(getMockRepository().exists(null, model.getUsername(), model.getEmail())).thenReturn(false);
+      when(parameterDao.findByNameIgnoreCase("DEFAULT_ROLE")).thenReturn(Parameter.builder().build());
+      when(roleDao.findByNameIgnoreCase(null)).thenThrow(new RoleNotFoundException());
 
-    getService().register(model);
+      getService().register(model);
+    });
   }
 
 
@@ -833,11 +865,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testVerifyNotFound() {
-    when(getMockRepository().setVerified(ID, true)).thenReturn(null);
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setVerified(ID, true)).thenReturn(null);
 
-    getService().verify(ID);
+      getService().verify(ID);
+    });
   }
 
   /**
@@ -845,11 +879,13 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testVerifyNotFoundException() {
-    when(getMockRepository().setVerified(ID, true)).thenThrow(new UserNotFoundException());
+    assertThrows(UserNotFoundException.class, () -> {
+      when(getMockRepository().setVerified(ID, true)).thenThrow(new UserNotFoundException());
 
-    getService().verify(ID);
+      getService().verify(ID);
+    });
   }
 
 
@@ -879,14 +915,16 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testVerifyByOwnerNotFound() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setVerifiedByOwner(ID, true, owner)).thenReturn(null);
+      when(getMockRepository().setVerifiedByOwner(ID, true, owner)).thenReturn(null);
 
-    getService().verifyByOwner(ID, ownerId);
+      getService().verifyByOwner(ID, ownerId);
+    });
   }
 
   /**
@@ -894,15 +932,17 @@ public class UserServiceImplTest extends AbstractGenericServiceTest<User, UserDt
    * 
    * @throws UserNotFoundException if the user entity to update is not found.
    */
-  @Test(expected = UserNotFoundException.class)
+  @Test
   public void testVerifyByOwnerNotFoundException() {
-    final UUID ownerId = UUID.randomUUID();
-    final User owner = User.builder().id(ownerId).build();
+    assertThrows(UserNotFoundException.class, () -> {
+      final UUID ownerId = UUID.randomUUID();
+      final User owner = User.builder().id(ownerId).build();
 
-    when(getMockRepository().setVerifiedByOwner(ID, true, owner))
-        .thenThrow(new UserNotFoundException());
+      when(getMockRepository().setVerifiedByOwner(ID, true, owner))
+          .thenThrow(new UserNotFoundException());
 
-    getService().verifyByOwner(ID, ownerId);
+      getService().verifyByOwner(ID, ownerId);
+    });
   }
 
 }

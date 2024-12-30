@@ -7,7 +7,7 @@ package com.monogramm.starter.utils.converter;
 import java.awt.Color;
 import java.awt.Transparency;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Color Converter.
@@ -22,8 +22,8 @@ public class ColorConverter implements AttributeConverter<Color, String> {
     public String apply(Object object) {
       final String value;
 
-      if (object instanceof Color) {
-        final Color color = ((Color) object);
+      if (object instanceof Color color1) {
+        final Color color = color1;
 
         final StringBuilder colorBuilder = new StringBuilder("#");
 

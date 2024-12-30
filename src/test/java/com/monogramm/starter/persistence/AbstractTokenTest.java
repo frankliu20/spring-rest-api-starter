@@ -4,19 +4,14 @@
 
 package com.monogramm.starter.persistence;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.junit.jupiter.api.Test;
+
 import com.monogramm.starter.persistence.user.entity.User;
 
 import java.util.Date;
-
-import org.junit.Test;
 
 /**
  * {@link AbstractToken} Unit Test.
@@ -49,6 +44,7 @@ public abstract class AbstractTokenTest<T extends AbstractToken>
   abstract protected T buildTestEntity(T other);
 
   @Override
+  @Test
   public void testToJson() throws JsonProcessingException {
     super.testToJson();
 
@@ -64,6 +60,7 @@ public abstract class AbstractTokenTest<T extends AbstractToken>
   }
 
   @Override
+  @Test
   public void testToString() {
     super.testToString();
 
@@ -79,6 +76,7 @@ public abstract class AbstractTokenTest<T extends AbstractToken>
   }
 
   @Override
+  @Test
   public void testHashCode() {
     assertEquals(this.getEntity().hashCode(), this.getEntity().hashCode());
 
@@ -104,6 +102,7 @@ public abstract class AbstractTokenTest<T extends AbstractToken>
   }
 
   @Override
+  @Test
   public void testEqualsObject() {
     assertEquals(this.getEntity(), this.getEntity());
     assertNotEquals(this.getEntity(), null);
@@ -167,9 +166,10 @@ public abstract class AbstractTokenTest<T extends AbstractToken>
   /**
    * Test method for {@link AbstractToken#calculateExpiryDate(int)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testCreateRandomReadableTokenIllegalArgumentException() {
-    AbstractToken.createRandomToken(-1);
+    assertThrows(IllegalArgumentException.class, () ->
+      AbstractToken.createRandomToken(-1));
   }
 
   /**

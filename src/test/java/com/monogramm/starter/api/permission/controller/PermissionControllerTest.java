@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.api.permission.controller;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 import com.monogramm.starter.api.AbstractGenericController;
@@ -18,9 +18,9 @@ import com.monogramm.starter.persistence.permission.service.PermissionBridge;
 
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.core.Authentication;
 
@@ -38,7 +38,7 @@ public class PermissionControllerTest
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     super.setUp();
   }
@@ -46,7 +46,7 @@ public class PermissionControllerTest
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(getMockService());
     this.setBridge(null);

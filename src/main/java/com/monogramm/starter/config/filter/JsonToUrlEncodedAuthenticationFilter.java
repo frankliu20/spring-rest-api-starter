@@ -13,13 +13,13 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.core.annotation.Order;
@@ -56,10 +56,9 @@ public class JsonToUrlEncodedAuthenticationFilter implements Filter {
     ServletRequest finalRequest;
 
     // Convert OAuth token JSON requests
-    if (request instanceof RequestFacade
+    if (request instanceof RequestFacade requestFacade
         && "application/json".equalsIgnoreCase(request.getContentType())
-        && "/oauth/token".equals(((RequestFacade) request).getServletPath())) {
-      final RequestFacade requestFacade = (RequestFacade) request;
+        && "/oauth/token".equals(requestFacade.getServletPath())) {
 
       final Map<String, String[]> parameters =
           this.readAndConvertContent(requestFacade.getInputStream());

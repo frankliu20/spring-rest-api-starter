@@ -10,11 +10,11 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.OneToOne;
 
 /**
  * AbstractToken.
@@ -236,8 +236,7 @@ public abstract class AbstractToken extends AbstractGenericEntity {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof AbstractToken) {
-      final AbstractToken genericToken = (AbstractToken) entity;
+    if (entity instanceof AbstractToken genericToken) {
 
       this.setCode(genericToken.getCode());
       this.setExpiryDate(genericToken.getExpiryDate());
@@ -264,8 +263,7 @@ public abstract class AbstractToken extends AbstractGenericEntity {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof AbstractToken) {
-      final AbstractToken other = (AbstractToken) obj;
+    if (equals && obj instanceof AbstractToken other) {
       equals = Objects.equals(getCode(), other.getCode());
 
       if (equals) {

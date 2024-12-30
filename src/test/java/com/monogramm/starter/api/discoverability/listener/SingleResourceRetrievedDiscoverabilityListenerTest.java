@@ -4,9 +4,10 @@
 
 package com.monogramm.starter.api.discoverability.listener;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -18,11 +19,11 @@ import com.monogramm.starter.persistence.AbstractGenericEntity;
 
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -41,7 +42,7 @@ public class SingleResourceRetrievedDiscoverabilityListenerTest {
   /**
    * @throws java.lang.Exception
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.requestUrl = "https://dummy.company.com/api/resources/";
     this.response = mock(HttpServletResponse.class);
@@ -52,7 +53,7 @@ public class SingleResourceRetrievedDiscoverabilityListenerTest {
   /**
    * @throws java.lang.Exception
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(this.response);
     this.response = null;
@@ -73,17 +74,19 @@ public class SingleResourceRetrievedDiscoverabilityListenerTest {
    * Test method for
    * {@link SingleResourceRetrievedDiscoverabilityListener#onApplicationEvent(SingleResourceRetrievedEvent)}.
    */
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void testOnApplicationEvent() {
-    // Mock
-    final AbstractGenericEntity source = new AbstractGenericEntity() {
-      private static final long serialVersionUID = 1L;
-    };
-    final SingleResourceRetrievedEvent event =
-        new SingleResourceRetrievedEvent(source, this.response);
+    assertThrows(IllegalStateException.class, () -> {
+      // Mock
+      final AbstractGenericEntity source = new AbstractGenericEntity() {
+        private static final long serialVersionUID = 1L;
+      };
+      final SingleResourceRetrievedEvent event =
+          new SingleResourceRetrievedEvent(source, this.response);
 
-    // Operation
-    this.listener.onApplicationEvent(event);
+      // Operation
+      this.listener.onApplicationEvent(event);
+    });
   }
 
   /**

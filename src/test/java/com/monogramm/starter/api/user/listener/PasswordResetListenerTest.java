@@ -4,9 +4,10 @@
 
 package com.monogramm.starter.api.user.listener;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -21,9 +22,9 @@ import com.monogramm.starter.persistence.user.service.PasswordResetTokenService;
 
 import java.util.Locale;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
@@ -49,7 +50,7 @@ public class PasswordResetListenerTest {
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     passwordResetTokenService = mock(PasswordResetTokenService.class);
     assertNotNull(passwordResetTokenService);
@@ -70,7 +71,7 @@ public class PasswordResetListenerTest {
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(passwordResetTokenService);
     Mockito.reset(messages);
@@ -93,36 +94,44 @@ public class PasswordResetListenerTest {
    * Test method for
    * {@link PasswordResetListener#PasswordResetListener(PasswordResetTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testPasswordResetListenerNullTokenService() {
-    new PasswordResetListener(null, messages, mailSender, emailProperties);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new PasswordResetListener(null, messages, mailSender, emailProperties);
+    });
   }
 
   /**
    * Test method for
    * {@link PasswordResetListener#PasswordResetListener(PasswordResetTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testPasswordResetListenerNullMessageSource() {
-    new PasswordResetListener(passwordResetTokenService, null, mailSender, emailProperties);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new PasswordResetListener(passwordResetTokenService, null, mailSender, emailProperties);
+    });
   }
 
   /**
    * Test method for
    * {@link PasswordResetListener#PasswordResetListener(PasswordResetTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testPasswordResetListenerNullJavaMailSender() {
-    new PasswordResetListener(passwordResetTokenService, messages, null, emailProperties);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new PasswordResetListener(passwordResetTokenService, messages, null, emailProperties);
+    });
   }
 
   /**
    * Test method for
    * {@link PasswordResetListener#PasswordResetListener(PasswordResetTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testPasswordResetListenerNullEnvironment() {
-    new PasswordResetListener(passwordResetTokenService, messages, mailSender, null);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new PasswordResetListener(passwordResetTokenService, messages, mailSender, null);
+    });
   }
 
   /**
@@ -136,7 +145,7 @@ public class PasswordResetListenerTest {
     final OnPasswordResetEvent event = new OnPasswordResetEvent(user, Locale.getDefault(), appUrl);
 
     // Mock
-    when(passwordResetTokenService.add(anyObject())).thenReturn(true);
+    when(passwordResetTokenService.add(any())).thenReturn(true);
 
     final String subject = "dummy_subject";
     when(messages.getMessage("api.user.listener.reset_password_subject", null, locale))
@@ -152,7 +161,7 @@ public class PasswordResetListenerTest {
     this.listener.onApplicationEvent(event);
 
     // Check
-    verify(passwordResetTokenService, times(1)).add(anyObject());
+    verify(passwordResetTokenService, times(1)).add(any());
     verifyNoMoreInteractions(passwordResetTokenService);
 
     verify(messages, times(1)).getMessage("api.user.listener.reset_password_subject", null, locale);
@@ -167,17 +176,19 @@ public class PasswordResetListenerTest {
   /**
    * Test method for {@link PasswordResetListener#onApplicationEvent(OnPasswordResetEvent)}.
    */
-  @Test(expected = PasswordResetTokenNotFoundException.class)
+  @Test
   public void testOnApplicationEventTokenNotAdded() {
-    final User user = User.builder().build();
-    final String appUrl = "http://dummy/";
-    final OnPasswordResetEvent event = new OnPasswordResetEvent(user, Locale.getDefault(), appUrl);
+    assertThrows(PasswordResetTokenNotFoundException.class, () -> {
+      final User user = User.builder().build();
+      final String appUrl = "http://dummy/";
+      final OnPasswordResetEvent event = new OnPasswordResetEvent(user, Locale.getDefault(), appUrl);
 
-    // Mock
-    when(passwordResetTokenService.add(anyObject())).thenReturn(false);
+      // Mock
+      when(passwordResetTokenService.add(any())).thenReturn(false);
 
-    // Operation
-    this.listener.onApplicationEvent(event);
+      // Operation
+      this.listener.onApplicationEvent(event);
+    });
   }
 
 }

@@ -7,9 +7,8 @@ package com.monogramm.starter.dto.user;
 import com.monogramm.starter.utils.validation.PasswordConfirmationDto;
 import com.monogramm.starter.utils.validation.ValidEmail;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * A password reset Data Transfer Object.

@@ -4,10 +4,7 @@
 
 package com.monogramm.starter.config.data;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 import com.monogramm.starter.config.properties.DataProperties;
@@ -17,9 +14,9 @@ import com.monogramm.starter.persistence.role.service.RoleService;
 import com.monogramm.starter.persistence.type.service.TypeService;
 import com.monogramm.starter.persistence.user.service.UserService;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.context.MessageSource;
 
@@ -47,7 +44,7 @@ public class InitialDataLoaderTest {
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.dataProperties = new DataProperties();
     this.messageSource = mock(MessageSource.class);
@@ -65,7 +62,7 @@ public class InitialDataLoaderTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.dataProperties = null;
     Mockito.reset(messageSource);

@@ -9,7 +9,7 @@ import com.monogramm.starter.persistence.AbstractGenericEntity;
 
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Event that is fired when a resource is created.

@@ -4,11 +4,7 @@
 
 package com.monogramm.starter.config.component;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -24,11 +20,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,7 +57,7 @@ public class CustomTokenEnhancerTest {
   /**
    * @throws java.lang.Exception If test class initialization crashes.
    */
-  @BeforeClass
+  @BeforeAll
   public static void setUpBeforeClass() throws Exception {
     DUMMY_AUTHORITIES.add(new SimpleGrantedAuthority(DUMMY_ROLE));
     DUMMY_AUTHORITIES.add(new SimpleGrantedAuthority(DUMMY_AUTH));
@@ -94,7 +90,7 @@ public class CustomTokenEnhancerTest {
   /**
    * @throws java.lang.Exception If test class clean up crashes.
    */
-  @AfterClass
+  @AfterAll
   public static void tearDownAfterClass() throws Exception {
     DUMMY_AUTHORITIES.clear();
   }
@@ -102,7 +98,7 @@ public class CustomTokenEnhancerTest {
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.userService = mock(UserService.class);
 
@@ -114,7 +110,7 @@ public class CustomTokenEnhancerTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(userService);
 

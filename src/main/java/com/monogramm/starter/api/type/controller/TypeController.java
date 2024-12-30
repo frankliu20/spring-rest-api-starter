@@ -12,9 +12,8 @@ import com.monogramm.starter.utils.validation.ValidUuid;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
@@ -108,7 +107,6 @@ public class TypeController extends AbstractGenericController<Type, TypeDto> {
    * @param eventPublisher the event publisher.
    * @param typeService the type service.
    */
-  @Autowired
   public TypeController(MessageSource messageSource, ApplicationEventPublisher eventPublisher,
       TypeService typeService) {
     super(messageSource, eventPublisher, typeService);

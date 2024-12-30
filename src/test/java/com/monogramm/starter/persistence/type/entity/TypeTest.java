@@ -4,16 +4,12 @@
 
 package com.monogramm.starter.persistence.type.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.monogramm.starter.persistence.AbstractGenericEntityTest;
 import com.monogramm.starter.persistence.type.entity.Type;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link Type} Unit Test.
@@ -34,6 +30,7 @@ public class TypeTest extends AbstractGenericEntityTest<Type> {
   }
 
   @Override
+  @Test
   public void testHashCode() {
     super.testHashCode();
 
@@ -51,6 +48,7 @@ public class TypeTest extends AbstractGenericEntityTest<Type> {
   }
 
   @Override
+  @Test
   public void testEqualsObject() {
     super.testEqualsObject();
 
@@ -98,9 +96,11 @@ public class TypeTest extends AbstractGenericEntityTest<Type> {
   /**
    * Test method for {@link Type#Type()}.
    */
-  @Test(expected = NullPointerException.class)
+  @Test
   public void testTypeTypeNull() {
-    new Type((Type) null);
+    assertThrows(NullPointerException.class, () -> {
+      new Type((Type) null);
+    });
   }
 
   /**

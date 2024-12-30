@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -83,7 +82,6 @@ public class CustomTokenEnhancer implements TokenEnhancer {
    * 
    * @param userService the user service.
    */
-  @Autowired
   public CustomTokenEnhancer(UserService userService) {
     super();
     this.userService = userService;
@@ -92,10 +90,10 @@ public class CustomTokenEnhancer implements TokenEnhancer {
   @Override
   public OAuth2AccessToken enhance(final OAuth2AccessToken accessToken,
       final OAuth2Authentication authentication) {
-    if (accessToken instanceof DefaultOAuth2AccessToken) {
+    if (accessToken instanceof DefaultOAuth2AccessToken token) {
       final Map<String, Object> additionalInfo = this.getAdditionalInformation(authentication);
 
-      ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
+      token.setAdditionalInformation(additionalInfo);
     }
 
     return accessToken;

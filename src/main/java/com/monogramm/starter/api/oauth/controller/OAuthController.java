@@ -4,7 +4,7 @@ import com.monogramm.starter.api.AbstractGenericController;
 
 import java.util.Locale;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,8 +124,8 @@ public final class OAuthController {
    */
   @PostMapping(value = REVOKE_REFRESH_TOKEN_PATH + "/{tokenId:.*}")
   public String revokeRefreshToken(@PathVariable final String tokenId) {
-    if (tokenServices instanceof JdbcTokenStore) {
-      ((JdbcTokenStore) tokenServices).removeRefreshToken(tokenId);
+    if (tokenServices instanceof JdbcTokenStore store) {
+      store.removeRefreshToken(tokenId);
       if (LOG.isInfoEnabled()) {
         final String msg = messageSource.getMessage("controller.oauth.refresh_token_revoked",
             new String[] {tokenId}, locale);

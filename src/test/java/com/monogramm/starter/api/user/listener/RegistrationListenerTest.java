@@ -4,9 +4,10 @@
 
 package com.monogramm.starter.api.user.listener;
 
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -21,9 +22,9 @@ import com.monogramm.starter.persistence.user.service.VerificationTokenService;
 
 import java.util.Locale;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
@@ -49,7 +50,7 @@ public class RegistrationListenerTest {
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     verificationService = mock(VerificationTokenService.class);
     assertNotNull(verificationService);
@@ -70,7 +71,7 @@ public class RegistrationListenerTest {
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(verificationService);
     Mockito.reset(messages);
@@ -94,36 +95,44 @@ public class RegistrationListenerTest {
    * Test method for
    * {@link RegistrationListener#RegistrationListener(VerificationTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testRegistrationListenerNullTokenService() {
-    new RegistrationListener(null, messages, mailSender, emailProperties);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new RegistrationListener(null, messages, mailSender, emailProperties);
+    });
   }
 
   /**
    * Test method for
    * {@link RegistrationListener#RegistrationListener(VerificationTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testRegistrationListenerNullMessageSource() {
-    new RegistrationListener(verificationService, null, mailSender, emailProperties);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new RegistrationListener(verificationService, null, mailSender, emailProperties);
+    });
   }
 
   /**
    * Test method for
    * {@link RegistrationListener#RegistrationListener(VerificationTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testRegistrationListenerNullJavaMailSender() {
-    new RegistrationListener(verificationService, messages, null, emailProperties);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new RegistrationListener(verificationService, messages, null, emailProperties);
+    });
   }
 
   /**
    * Test method for
    * {@link RegistrationListener#RegistrationListener(VerificationTokenService, MessageSource, JavaMailSender, EmailProperties)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testRegistrationListenerNullEnvironment() {
-    new RegistrationListener(verificationService, messages, mailSender, null);
+    assertThrows(IllegalArgumentException.class, () -> {
+      new RegistrationListener(verificationService, messages, mailSender, null);
+    });
   }
 
   /**
@@ -138,7 +147,7 @@ public class RegistrationListenerTest {
         new OnRegistrationCompleteEvent(user, Locale.getDefault(), appUrl);
 
     // Mock
-    when(verificationService.add(anyObject())).thenReturn(true);
+    when(verificationService.add(any())).thenReturn(true);
 
     final String subject = "dummy_subject";
     when(messages.getMessage("api.user.listener.confirm_email_subject", null, locale))
@@ -154,7 +163,7 @@ public class RegistrationListenerTest {
     this.listener.onApplicationEvent(event);
 
     // Check
-    verify(verificationService, times(1)).add(anyObject());
+    verify(verificationService, times(1)).add(any());
     verifyNoMoreInteractions(verificationService);
 
     verify(messages, times(1)).getMessage("api.user.listener.confirm_email_subject", null, locale);
@@ -169,18 +178,20 @@ public class RegistrationListenerTest {
   /**
    * Test method for {@link RegistrationListener#onApplicationEvent(OnRegistrationCompleteEvent)}.
    */
-  @Test(expected = VerificationTokenNotFoundException.class)
+  @Test
   public void testOnApplicationEventTokenNotAdded() {
-    final User user = User.builder().build();
-    final String appUrl = "http://dummy/";
-    final OnRegistrationCompleteEvent event =
-        new OnRegistrationCompleteEvent(user, Locale.getDefault(), appUrl);
+    assertThrows(VerificationTokenNotFoundException.class, () -> {
+      final User user = User.builder().build();
+      final String appUrl = "http://dummy/";
+      final OnRegistrationCompleteEvent event =
+          new OnRegistrationCompleteEvent(user, Locale.getDefault(), appUrl);
 
-    // Mock
-    when(verificationService.add(anyObject())).thenReturn(false);
+      // Mock
+      when(verificationService.add(any())).thenReturn(false);
 
-    // Operation
-    this.listener.onApplicationEvent(event);
+      // Operation
+      this.listener.onApplicationEvent(event);
+    });
   }
 
 }

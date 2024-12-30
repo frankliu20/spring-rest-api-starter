@@ -12,7 +12,6 @@ import com.monogramm.starter.persistence.user.entity.VerificationToken;
 import com.monogramm.starter.persistence.user.exception.VerificationTokenNotFoundException;
 import com.monogramm.starter.persistence.user.service.VerificationTokenService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -43,7 +42,6 @@ public class RegistrationListener
    * 
    * @throws IllegalArgumentException if any of the parameters is {@code null}.
    */
-  @Autowired
   public RegistrationListener(VerificationTokenService verificationService, MessageSource messages,
       JavaMailSender mailSender, EmailProperties emailProperties) {
     super(messages, mailSender, emailProperties);

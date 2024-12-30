@@ -12,7 +12,6 @@ import com.monogramm.starter.persistence.user.dao.UserRepository;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +33,6 @@ public class RoleServiceImpl extends AbstractGenericService<Role, RoleDto> imple
    * @param permissionDao the permission repository.
    * @param authenticationFacade a facade to retrieve the authentication object.
    */
-  @Autowired
   public RoleServiceImpl(final RoleRepository roleDao, final UserRepository userDao,
       final PermissionRepository permissionDao, IAuthenticationFacade authenticationFacade) {
     super(roleDao, userDao, new RoleBridge(userDao, permissionDao), authenticationFacade);

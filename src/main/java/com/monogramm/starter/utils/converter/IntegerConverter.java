@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.utils.converter;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Integer Converter.
@@ -17,7 +17,7 @@ public class IntegerConverter implements AttributeConverter<Integer, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof Integer ? ((Integer) object).toString() : null;
+      return object instanceof Integer i ? i.toString() : null;
     }
 
   }

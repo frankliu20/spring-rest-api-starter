@@ -4,14 +4,11 @@
 
 package com.monogramm.starter.dto.user;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.monogramm.starter.utils.validation.PasswordConfirmationDtoTest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link PasswordResetDto} Unit Test.

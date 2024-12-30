@@ -21,14 +21,13 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.Resource;
@@ -135,7 +134,6 @@ public class MediaController extends AbstractGenericController<Media, MediaDto> 
    * @param eventPublisher the event publisher.
    * @param mediaService the media service.
    */
-  @Autowired
   public MediaController(MessageSource messageSource, ApplicationEventPublisher eventPublisher,
       MediaService mediaService) {
     super(messageSource, eventPublisher, mediaService);
@@ -361,7 +359,7 @@ public class MediaController extends AbstractGenericController<Media, MediaDto> 
   @PostMapping(value = UPLOAD_PATH, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
   @PreAuthorize(value = "hasAuthority('" + AUTH_CREATE + "')")
   public List<MediaDto> uploadMultipleMedia(Authentication authentication,
-      @RequestParam("files") MultipartFile... files) {
+      @RequestParam MultipartFile... files) {
     final List<MediaDto> dtos = new ArrayList<>(files.length);
 
     for (MultipartFile file : files) {

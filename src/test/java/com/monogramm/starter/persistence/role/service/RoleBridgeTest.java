@@ -4,12 +4,7 @@
 
 package com.monogramm.starter.persistence.role.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,9 +21,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -59,7 +54,7 @@ public class RoleBridgeTest extends AbstractGenericBridgeTest<Role, RoleDto, Rol
    * 
    * @see com.monogramm.starter.persistence.AbstractGenericBridgeTest#setUp()
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     super.setUp();
 
@@ -71,7 +66,7 @@ public class RoleBridgeTest extends AbstractGenericBridgeTest<Role, RoleDto, Rol
    * 
    * @see com.monogramm.starter.persistence.AbstractGenericBridgeTest#tearDown()
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     super.tearDown();
 

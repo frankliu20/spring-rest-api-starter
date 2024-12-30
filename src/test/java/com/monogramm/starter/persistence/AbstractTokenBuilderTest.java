@@ -4,14 +4,14 @@
 
 package com.monogramm.starter.persistence;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.monogramm.starter.persistence.AbstractToken.AbstractTokenBuilder;
 import com.monogramm.starter.persistence.user.entity.User;
 
 import java.util.Date;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link AbstractTokenBuilder} Unit Test.

@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.utils.converter;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * Double Converter.
@@ -17,7 +17,7 @@ public class DoubleConverter implements AttributeConverter<Double, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof Double ? ((Double) object).toString() : null;
+      return object instanceof Double d ? d.toString() : null;
     }
 
   }

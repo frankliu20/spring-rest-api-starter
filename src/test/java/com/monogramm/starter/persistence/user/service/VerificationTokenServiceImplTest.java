@@ -4,11 +4,9 @@
 
 package com.monogramm.starter.persistence.user.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -28,7 +26,7 @@ import com.monogramm.starter.persistence.user.exception.VerificationTokenNotFoun
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 /**
@@ -194,12 +192,14 @@ public class VerificationTokenServiceImplTest extends
    * 
    * @throws VerificationTokenNotFoundException if the verificationToken is not found.
    */
-  @Test(expected = VerificationTokenNotFoundException.class)
+  @Test
   public void testFindByUserAndTokenVerificationTokenNotFoundException() {
-    when(getMockRepository().findByUserAndCode(USER_ID, TOKEN))
-        .thenThrow(new VerificationTokenNotFoundException());
+    assertThrows(VerificationTokenNotFoundException.class, () -> {
+      when(getMockRepository().findByUserAndCode(USER_ID, TOKEN))
+          .thenThrow(new VerificationTokenNotFoundException());
 
-    getService().findByUserAndCode(USER_ID, TOKEN);
+      getService().findByUserAndCode(USER_ID, TOKEN);
+    });
   }
 
 }

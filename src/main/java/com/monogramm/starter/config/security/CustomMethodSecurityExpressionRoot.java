@@ -49,10 +49,10 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot
       final UUID principalId = IAuthenticationFacade.getPrincipalId(details);
 
       if (principalId != null) {
-        if (data instanceof AbstractGenericDto) {
-          isOwner = principalId.equals(((AbstractGenericDto) data).getOwner());
-        } else if (data instanceof AbstractGenericEntity) {
-          final User owner = ((AbstractGenericEntity) data).getOwner();
+        if (data instanceof AbstractGenericDto dto) {
+          isOwner = principalId.equals(dto.getOwner());
+        } else if (data instanceof AbstractGenericEntity entity) {
+          final User owner = entity.getOwner();
           isOwner = owner != null && principalId.equals(owner.getId());
         }
       }
@@ -71,8 +71,8 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot
     final Object targetData;
 
     final Object object = this.getReturnObject();
-    if (object instanceof ResponseEntity) {
-      targetData = ((ResponseEntity<?>) object).getBody();
+    if (object instanceof ResponseEntity<?> entity) {
+      targetData = entity.getBody();
     } else {
       targetData = object;
     }

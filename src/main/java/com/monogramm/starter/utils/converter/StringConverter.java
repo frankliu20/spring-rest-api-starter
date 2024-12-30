@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.utils.converter;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * String Converter.
@@ -17,7 +17,7 @@ public class StringConverter implements AttributeConverter<String, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof String ? ((String) object).toString() : null;
+      return object instanceof String s ? s.toString() : null;
     }
 
   }

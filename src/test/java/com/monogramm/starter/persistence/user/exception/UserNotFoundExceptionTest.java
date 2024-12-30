@@ -4,12 +4,12 @@
 
 package com.monogramm.starter.persistence.user.exception;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.monogramm.starter.persistence.user.exception.UserNotFoundException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link UserNotFoundException} Unit Test.

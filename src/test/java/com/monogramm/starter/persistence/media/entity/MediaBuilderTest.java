@@ -4,19 +4,16 @@
 
 package com.monogramm.starter.persistence.media.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.monogramm.starter.persistence.AbstractGenericEntityBuilderTest;
 import com.monogramm.starter.persistence.media.entity.Media.MediaBuilder;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link MediaBuilder} Unit Test.
@@ -124,7 +121,7 @@ public class MediaBuilderTest extends AbstractGenericEntityBuilderTest<Media.Med
     assertEquals(this.getEntityBuilder(), this.getEntityBuilder().path((Path) null));
 
     final String pathStr = UUID.randomUUID().toString();
-    final Path path = Paths.get(pathStr);
+    final Path path = Path.of(pathStr);
     assertEquals(path.toString(), this.getEntityBuilder().path(path).build().getPath());
   }
 

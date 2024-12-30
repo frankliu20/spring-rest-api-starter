@@ -5,9 +5,10 @@
 package com.monogramm.starter.utils.converter;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * URL Converter.
@@ -20,7 +21,7 @@ public class UrlConverter implements AttributeConverter<URL, String> {
 
     @Override
     public String apply(Object object) {
-      return object instanceof URL ? ((URL) object).toString() : null;
+      return object instanceof URL url ? url.toString() : null;
     }
 
   }
@@ -31,7 +32,7 @@ public class UrlConverter implements AttributeConverter<URL, String> {
     public URL apply(String value) {
       URL url;
       try {
-        url = new URL(value);
+        url = URI.create(value).toURL();
       } catch (MalformedURLException e) {
         url = null;
       }

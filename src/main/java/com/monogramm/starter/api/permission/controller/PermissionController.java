@@ -12,9 +12,8 @@ import com.monogramm.starter.utils.validation.ValidUuid;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
@@ -108,7 +107,6 @@ public class PermissionController extends AbstractGenericController<Permission, 
    * @param eventPublisher the event publisher.
    * @param permissionService the permission service.
    */
-  @Autowired
   public PermissionController(MessageSource messageSource, ApplicationEventPublisher eventPublisher,
       PermissionService permissionService) {
     super(messageSource, eventPublisher, permissionService);

@@ -7,8 +7,8 @@ package com.monogramm.starter.persistence.parameter.entity;
 import com.monogramm.starter.persistence.AbstractParameter;
 import com.monogramm.starter.persistence.ParameterType;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 /**
  * Parameter.

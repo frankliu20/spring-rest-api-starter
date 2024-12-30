@@ -4,9 +4,7 @@
 
 package com.monogramm.starter.persistence.role.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.monogramm.starter.persistence.AbstractGenericEntityBuilderTest;
 import com.monogramm.starter.persistence.permission.entity.Permission;
@@ -18,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link RoleBuilder} Unit Test.

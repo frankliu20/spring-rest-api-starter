@@ -4,11 +4,9 @@
 
 package com.monogramm.starter.persistence.user.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -28,7 +26,7 @@ import com.monogramm.starter.persistence.user.exception.PasswordResetTokenNotFou
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
 /**
@@ -194,12 +192,14 @@ public class PasswordResetTokenServiceImplTest extends
    * 
    * @throws PasswordResetTokenNotFoundException if the verificationToken is not found.
    */
-  @Test(expected = PasswordResetTokenNotFoundException.class)
+  @Test
   public void testFindByUserAndTokenPasswordResetTokenNotFoundException() {
-    when(getMockRepository().findByUserAndCode(USER_ID, TOKEN))
-        .thenThrow(new PasswordResetTokenNotFoundException());
+    assertThrows(PasswordResetTokenNotFoundException.class, () -> {
+      when(getMockRepository().findByUserAndCode(USER_ID, TOKEN))
+          .thenThrow(new PasswordResetTokenNotFoundException());
 
-    getService().findByUserAndCode(USER_ID, TOKEN);
+      getService().findByUserAndCode(USER_ID, TOKEN);
+    });
   }
 
 }

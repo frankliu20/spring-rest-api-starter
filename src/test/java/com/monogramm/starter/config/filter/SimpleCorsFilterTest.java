@@ -14,17 +14,17 @@ import com.monogramm.starter.config.filter.SimpleCorsFilter.AccessControlAllowHe
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -43,19 +43,19 @@ public class SimpleCorsFilterTest {
   /**
    * @throws java.lang.Exception If test class initialization crashes.
    */
-  @BeforeClass
+  @BeforeAll
   public static void setUpBeforeClass() throws Exception {}
 
   /**
    * @throws java.lang.Exception If test class clean up crashes.
    */
-  @AfterClass
+  @AfterAll
   public static void tearDownAfterClass() throws Exception {}
 
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.filter = new SimpleCorsFilter();
 
@@ -67,7 +67,7 @@ public class SimpleCorsFilterTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.filter = null;
 
@@ -77,7 +77,7 @@ public class SimpleCorsFilterTest {
   }
 
   /**
-   * Test method for {@link SimpleCorsFilter#init(javax.servlet.FilterConfig)}.
+   * Test method for {@link SimpleCorsFilter#init(jakarta.servlet.FilterConfig)}.
    * 
    * @throws ServletException if the initialization crashed.
    */
@@ -88,7 +88,7 @@ public class SimpleCorsFilterTest {
 
   /**
    * Test method for
-   * {@link SimpleCorsFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link SimpleCorsFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -126,7 +126,7 @@ public class SimpleCorsFilterTest {
 
   /**
    * Test method for
-   * {@link SimpleCorsFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link SimpleCorsFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -164,7 +164,7 @@ public class SimpleCorsFilterTest {
 
   /**
    * Test method for
-   * {@link SimpleCorsFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link SimpleCorsFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason
@@ -195,7 +195,7 @@ public class SimpleCorsFilterTest {
 
   /**
    * Test method for
-   * {@link SimpleCorsFilter#doFilter(javax.servlet.ServletRequest, ServletResponse, FilterChain)}.
+   * {@link SimpleCorsFilter#doFilter(jakarta.servlet.ServletRequest, ServletResponse, FilterChain)}.
    * 
    * @throws IOException if an I/O error occurs during this filter's processing of the request
    * @throws ServletException if the processing fails for any other reason

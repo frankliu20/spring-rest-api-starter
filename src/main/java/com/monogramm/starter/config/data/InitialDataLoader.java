@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
@@ -93,7 +92,6 @@ public class InitialDataLoader extends AbstractDataLoader {
    * @param typeService the type service.
    * @param parameterService the parameters service.
    */
-  @Autowired
   public InitialDataLoader(DataProperties dataProperties, MessageSource messageSource,
       UserService userService, RoleService roleService, PermissionService permissionService,
       TypeService typeService, ParameterService parameterService) {

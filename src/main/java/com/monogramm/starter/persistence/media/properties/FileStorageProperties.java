@@ -7,7 +7,6 @@ package com.monogramm.starter.persistence.media.properties;
 import com.monogramm.starter.config.properties.ApplicationProperties;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -59,7 +58,7 @@ public class FileStorageProperties {
    * @param uploadDir the upload directory
    */
   public FileStorageProperties(String uploadDir) {
-    this(Paths.get(uploadDir));
+    this(Path.of(uploadDir));
   }
 
   /**

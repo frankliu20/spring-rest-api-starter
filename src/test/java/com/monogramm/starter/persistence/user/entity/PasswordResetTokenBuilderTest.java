@@ -4,15 +4,15 @@
 
 package com.monogramm.starter.persistence.user.entity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.monogramm.starter.persistence.AbstractTokenBuilderTest;
 import com.monogramm.starter.persistence.user.entity.PasswordResetToken.PasswordResetTokenBuilder;
 
 import java.util.Date;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * {@link PasswordResetTokenBuilder} Unit Test.

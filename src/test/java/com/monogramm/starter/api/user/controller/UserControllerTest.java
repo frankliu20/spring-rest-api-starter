@@ -4,10 +4,9 @@
 
 package com.monogramm.starter.api.user.controller;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -42,9 +41,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -80,7 +79,7 @@ public class UserControllerTest extends AbstractGenericControllerTest<User, User
    * 
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     password = PASSWORD.clone();
 
@@ -102,7 +101,7 @@ public class UserControllerTest extends AbstractGenericControllerTest<User, User
    * 
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(getMockService());
     this.setBridge(null);
@@ -876,18 +875,20 @@ public class UserControllerTest extends AbstractGenericControllerTest<User, User
    * @throws EntityNotFoundException if a default entity associated to a new user account is not
    *         found.
    */
-  @Test(expected = UnsupportedOperationException.class)
+  @Test
   public void testRegisterDisabled() {
-    final RegistrationDto model = new RegistrationDto();
-    model.setUsername(USERNAME);
-    model.setEmail(EMAIL);
-    model.setPassword(PASSWORD);
-    model.setMatchingPassword(PASSWORD);
+    assertThrows(UnsupportedOperationException.class, () -> {
+      final RegistrationDto model = new RegistrationDto();
+      model.setUsername(USERNAME);
+      model.setEmail(EMAIL);
+      model.setPassword(PASSWORD);
+      model.setMatchingPassword(PASSWORD);
 
-    when(parameterService.findByName(UserController.REGISTRATION_ENABLED))
-        .thenReturn(Parameter.builder(UserController.REGISTRATION_ENABLED, Boolean.FALSE).build());
+      when(parameterService.findByName(UserController.REGISTRATION_ENABLED))
+          .thenReturn(Parameter.builder(UserController.REGISTRATION_ENABLED, Boolean.FALSE).build());
 
-    getController().register(model, request);
+      getController().register(model, request);
+    });
   }
 
   /**

@@ -134,8 +134,7 @@ public abstract class AbstractTokenDto extends AbstractGenericDto {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof AbstractTokenDto) {
-      final AbstractTokenDto other = (AbstractTokenDto) obj;
+    if (equals && obj instanceof AbstractTokenDto other) {
       equals = Objects.equals(getCode(), other.getCode());
 
       if (equals) {

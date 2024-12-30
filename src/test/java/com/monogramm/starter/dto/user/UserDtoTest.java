@@ -4,13 +4,7 @@
 
 package com.monogramm.starter.dto.user;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 import com.monogramm.starter.dto.AbstractGenericDto;
@@ -19,9 +13,9 @@ import com.monogramm.starter.persistence.role.dao.RoleRepository;
 
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -51,7 +45,7 @@ public class UserDtoTest extends AbstractGenericDtoTest<UserDto> {
    * 
    * @see com.monogramm.starter.api.AbstractGenericDTOTest#setUp()
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     super.setUp();
 
@@ -63,7 +57,7 @@ public class UserDtoTest extends AbstractGenericDtoTest<UserDto> {
    * 
    * @see com.monogramm.starter.api.AbstractGenericDTOTest#tearDown()
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     super.tearDown();
 
@@ -71,6 +65,7 @@ public class UserDtoTest extends AbstractGenericDtoTest<UserDto> {
   }
 
   @Override
+  @Test
   public void testHashCode() {
     super.testHashCode();
 
@@ -96,6 +91,7 @@ public class UserDtoTest extends AbstractGenericDtoTest<UserDto> {
   }
 
   @Override
+  @Test
   public void testEqualsObject() {
     super.testEqualsObject();
 

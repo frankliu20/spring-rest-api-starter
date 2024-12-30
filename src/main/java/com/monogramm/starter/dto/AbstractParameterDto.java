@@ -32,9 +32,9 @@ public abstract class AbstractParameterDto extends AbstractGenericDto {
     public int compare(AbstractGenericDto o1, AbstractGenericDto o2) {
       final int compare;
 
-      if (o1 instanceof AbstractParameterDto && o2 instanceof AbstractParameterDto) {
-        final int compareName = compareOnString(((AbstractParameterDto) o1).getName(),
-            ((AbstractParameterDto) o2).getName());
+      if (o1 instanceof AbstractParameterDto dto && o2 instanceof AbstractParameterDto dto1) {
+        final int compareName = compareOnString(dto.getName(),
+            dto1.getName());
 
         if (compareName != 0) {
           compare = compareName;
@@ -212,8 +212,7 @@ public abstract class AbstractParameterDto extends AbstractGenericDto {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof AbstractParameterDto) {
-      final AbstractParameterDto other = (AbstractParameterDto) obj;
+    if (equals && obj instanceof AbstractParameterDto other) {
       equals = Objects.equals(getName(), other.getName())
           && Objects.equals(getDescription(), other.getDescription())
           && Objects.equals(getType(), other.getType())

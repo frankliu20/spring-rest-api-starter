@@ -15,7 +15,6 @@ import com.monogramm.starter.persistence.user.dao.UserRepository;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +34,6 @@ public class ParameterServiceImpl extends AbstractGenericService<Parameter, Para
    * @param userRepository the user repository.
    * @param authenticationFacade a facade to retrieve the authentication object.
    */
-  @Autowired
   public ParameterServiceImpl(ParameterRepository repository, UserRepository userRepository,
       IAuthenticationFacade authenticationFacade) {
     super(repository, userRepository, new ParameterBridge(userRepository), authenticationFacade);

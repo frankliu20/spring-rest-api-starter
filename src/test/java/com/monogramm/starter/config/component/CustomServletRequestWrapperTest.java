@@ -4,10 +4,7 @@
 
 package com.monogramm.starter.config.component;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.monogramm.starter.config.component.CustomServletRequestWrapper;
 
@@ -17,11 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.web.savedrequest.Enumerator;
 
@@ -47,7 +44,7 @@ public class CustomServletRequestWrapperTest {
   /**
    * @throws java.lang.Exception If test initialization crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     this.request = new MockHttpServletRequest();
     this.params = new HashMap<>();
@@ -60,7 +57,7 @@ public class CustomServletRequestWrapperTest {
   /**
    * @throws java.lang.Exception If test clean up crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     this.request = null;
     this.params = null;
@@ -68,7 +65,7 @@ public class CustomServletRequestWrapperTest {
 
   /**
    * Test method for
-   * {@link CustomServletRequestWrapper#CustomServletRequestWrapper(javax.servlet.http.HttpServletRequest, java.util.Map)}.
+   * {@link CustomServletRequestWrapper#CustomServletRequestWrapper(jakarta.servlet.http.HttpServletRequest, java.util.Map)}.
    */
   @Test
   public void testCustomServletRequestWrapper() {

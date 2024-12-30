@@ -4,7 +4,7 @@
 
 package com.monogramm.starter.api.parameter.controller;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 import com.monogramm.starter.api.AbstractGenericControllerTest;
@@ -16,8 +16,8 @@ import com.monogramm.starter.persistence.parameter.service.ParameterBridge;
 
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.core.Authentication;
 
@@ -36,7 +36,7 @@ public class ParameterControllerTest
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     Mockito.reset(getMockService());
     this.setBridge(null);

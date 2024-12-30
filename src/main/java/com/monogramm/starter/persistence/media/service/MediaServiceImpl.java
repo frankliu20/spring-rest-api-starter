@@ -22,7 +22,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +45,6 @@ public class MediaServiceImpl extends AbstractGenericService<Media, MediaDto>
    * @param authenticationFacade a facade to retrieve the authentication object.
    * @param fileProperties file storage properties
    */
-  @Autowired
   public MediaServiceImpl(MediaRepository repository, UserRepository userRepository,
       IAuthenticationFacade authenticationFacade, final FileStorageProperties fileProperties) {
     super(repository, userRepository, new MediaBridge(userRepository), authenticationFacade);

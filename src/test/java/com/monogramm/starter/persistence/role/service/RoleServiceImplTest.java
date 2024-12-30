@@ -4,13 +4,9 @@
 
 package com.monogramm.starter.persistence.role.service;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -29,9 +25,9 @@ import com.monogramm.starter.persistence.user.dao.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
@@ -49,7 +45,7 @@ public class RoleServiceImplTest extends AbstractGenericServiceTest<Role, RoleDt
   /**
    * @throws java.lang.Exception if the test setup crashes.
    */
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     permissionDao = mock(PermissionRepository.class);
     super.setUp();
@@ -58,7 +54,7 @@ public class RoleServiceImplTest extends AbstractGenericServiceTest<Role, RoleDt
   /**
    * @throws java.lang.Exception if the test cleanup crashes.
    */
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     super.tearDown();
     Mockito.reset(permissionDao);
@@ -166,9 +162,11 @@ public class RoleServiceImplTest extends AbstractGenericServiceTest<Role, RoleDt
    * Test method for
    * {@link RoleServiceImpl#RoleService(RoleRepository, UserRepository, PermissionRepository)}.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testRoleServiceIRoleRepositoryNull() {
-    new RoleServiceImpl(getMockRepository(), getMockUserRepository(), null, getMockAuthenticationFacade());
+    assertThrows(IllegalArgumentException.class, () -> {
+      new RoleServiceImpl(getMockRepository(), getMockUserRepository(), null, getMockAuthenticationFacade());
+    });
   }
 
   /**
@@ -221,12 +219,14 @@ public class RoleServiceImplTest extends AbstractGenericServiceTest<Role, RoleDt
    * 
    * @throws RoleNotFoundException if the role is not found.
    */
-  @Test(expected = RoleNotFoundException.class)
+  @Test
   public void testFindByNameRoleNotFoundException() {
-    when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
-        .thenThrow(new RoleNotFoundException());
+    assertThrows(RoleNotFoundException.class, () -> {
+      when(getMockRepository().findByNameIgnoreCase(DISPLAYNAME))
+          .thenThrow(new RoleNotFoundException());
 
-    getService().findByName(DISPLAYNAME);
+      getService().findByName(DISPLAYNAME);
+    });
   }
 
   /**

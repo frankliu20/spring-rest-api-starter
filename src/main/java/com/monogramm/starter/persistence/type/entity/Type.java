@@ -4,9 +4,9 @@ import com.monogramm.starter.persistence.AbstractGenericEntity;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "type")
@@ -100,8 +100,7 @@ public class Type extends AbstractGenericEntity {
   public <T extends AbstractGenericEntity> void update(T entity) {
     super.update(entity);
 
-    if (entity instanceof Type) {
-      final Type type = (Type) entity;
+    if (entity instanceof Type type) {
 
       this.setName(type.getName());
     }
@@ -124,8 +123,7 @@ public class Type extends AbstractGenericEntity {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof Type) {
-      final Type other = (Type) obj;
+    if (equals && obj instanceof Type other) {
       equals = Objects.equals(getName(), other.getName());
     }
 

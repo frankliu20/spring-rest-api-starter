@@ -37,8 +37,8 @@ public class RoleDto extends AbstractGenericDto {
     public int compare(AbstractGenericDto o1, AbstractGenericDto o2) {
       final int compare;
 
-      if (o1 instanceof RoleDto && o2 instanceof RoleDto) {
-        final int compareName = compareOnString(((RoleDto) o1).getName(), ((RoleDto) o2).getName());
+      if (o1 instanceof RoleDto dto && o2 instanceof RoleDto dto1) {
+        final int compareName = compareOnString(dto.getName(), dto1.getName());
 
         if (compareName != 0) {
           compare = compareName;
@@ -150,8 +150,7 @@ public class RoleDto extends AbstractGenericDto {
   public boolean equals(final Object obj) {
     boolean equals = super.equals(obj);
 
-    if (equals && obj instanceof RoleDto) {
-      final RoleDto other = (RoleDto) obj;
+    if (equals && obj instanceof RoleDto other) {
       equals = Objects.equals(getName(), other.getName());
     }
 
