@@ -16,7 +16,7 @@ import java.util.Arrays;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.jpa.HibernateEntityManagerFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,8 +156,8 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
   }
 
   @Bean
-  public SessionFactory sessionFactory(HibernateEntityManagerFactory hemf) {
-    return hemf.getSessionFactory();
+  public SessionFactory sessionFactory(SessionFactory sessionFactory) {
+    return sessionFactory;
   }
 
   // JDBC token store configuration

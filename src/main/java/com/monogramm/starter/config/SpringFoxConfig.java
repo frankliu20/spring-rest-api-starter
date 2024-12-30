@@ -11,13 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.customizers.OpenApiCustomiser;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.Contact;
 
 /**
  * SpringFoxConfig.
@@ -25,19 +22,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author mathieu.brunot
  */
 @Configuration
-@EnableSwagger2
+
 public class SpringFoxConfig {
 
   @Autowired
   private Environment env;
 
   @Bean
-  public Docket apiDocket() {
-    return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any())
-        .paths(PathSelectors.any()).build().apiInfo(getApiInfo());
+  public GroupedOpenApi apiDocket() {
+    return GroupedOpenApi.builder()
+        .group("default")
+        .pathsToMatch("/**")
+        .addOpenApiCustomiser(openApi -> openApi.info(getApiInfo()))
+        .build();
   }
 
-  private ApiInfo getApiInfo() {
+  private Info getApiInfo() {
     final String appName = env.getProperty("info.app.name");
     final String appDescription = env.getProperty("info.app.description");
     final String appVersion = env.getProperty("info.app.version");
@@ -51,8 +51,12 @@ public class SpringFoxConfig {
     final String contactUrl = env.getProperty("info.contact.url");
     final String contactEmail = env.getProperty("info.contact.email");
 
-    return new ApiInfo(appName + " Documentation", appDescription, appVersion, tosUrl,
-        new Contact(contactName, contactUrl, contactEmail), licenseName, licenseUrl,
-        Collections.emptyList());
+    return new Info()
+        .title(appName + " Documentation")
+        .description(appDescription)
+        .version(appVersion)
+        .termsOfService(tosUrl)
+        .license(new io.swagger.v3.oas.models.info.License().name(licenseName).url(licenseUrl))
+        .contact(new Contact().name(contactName).url(contactUrl).email(contactEmail));
   }
 }

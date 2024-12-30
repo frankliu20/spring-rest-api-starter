@@ -25,7 +25,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 /**
@@ -35,8 +35,8 @@ import org.springframework.security.web.access.channel.ChannelProcessingFilter;
  */
 @Configuration
 @EnableWebSecurity
-@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-public class OAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+public class OAuth2WebSecurityConfig {
 
   /**
    * The Spring Role prefix.
@@ -91,10 +91,10 @@ public class OAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .passwordEncoder(new CustomPasswordEncoder());
   }
 
-  /*~~(Migrate manually based on https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter)~~>*/@Override
+  /*~~(Migrate manually based on https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter)~~>*/
   @Bean
-  public AuthenticationManager authenticationManagerBean() throws Exception {
-    return super.authenticationManagerBean();
+    public AuthenticationManager authenticationManagerBean(AuthenticationManagerBuilder auth) throws Exception {
+        return auth.build();
   }
 
   @Override

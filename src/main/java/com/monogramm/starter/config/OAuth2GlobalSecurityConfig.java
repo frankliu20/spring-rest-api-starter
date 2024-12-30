@@ -9,7 +9,7 @@ import com.monogramm.starter.config.security.CustomPermissionEvaluator;
 
 import java.util.Map;
 
-import org.springframework.boot.autoconfigure.security.oauth2.resource.JwtAccessTokenConverterConfigurer;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -48,9 +48,9 @@ public class OAuth2GlobalSecurityConfig extends GlobalMethodSecurityConfiguratio
    * @author madmath03
    */
   public static class JwtConverter extends DefaultAccessTokenConverter
-      implements JwtAccessTokenConverterConfigurer {
+    {
 
-    @Override
+
     public void configure(JwtAccessTokenConverter converter) {
       converter.setAccessTokenConverter(this);
     }
